@@ -967,46 +967,68 @@ function saveData(){
 /* =====================================================
    ADMIN BUTTON
 ===================================================== */
-
-adminBtn.addEventListener(
+   adminBtn.addEventListener(
     "click",
     function(){
 
-        adminMode =
-            !adminMode;
-
-
+        // Agar already Admin Mode ON hai
         if(adminMode){
+
+            adminMode = false;
+
+            document.body.classList.remove("admin");
+
+            adminBtn.textContent = "✏️ EDIT";
+
+            notesBox.readOnly = true;
+
+            renderMembers();
+            renderGVG();
+            renderGallery();
+
+            return;
+        }
+
+        // Password + OK / Cancel
+        const password = prompt(
+            "🔐 Enter Admin Password:"
+        );
+
+        // CANCEL dabaya
+        if(password === null){
+            return;
+        }
+
+        // Password check
+        if(password === "8200156048"){
+
+            adminMode = true;
 
             document.body.classList.add("admin");
 
-            adminBtn.textContent =
-                "🔒 LOCK";
+            adminBtn.textContent = "🔒 LOCK";
 
             notesBox.readOnly = false;
 
             loadEditorValues();
 
+            renderMembers();
+            renderGVG();
+            renderGallery();
+
+            alert("✅ Admin Mode ON");
+
         }else{
 
-            document.body.classList.remove("admin");
-
-            adminBtn.textContent =
-                "✏️ EDIT";
-
-            notesBox.readOnly = true;
+            alert("❌ Wrong Password");
 
         }
 
-
-        renderMembers();
-
-        renderGVG();
-
-        renderGallery();
-
     }
 );
+            notesBox.readOnly = false;
+
+            
 
 
 /* =====================================================
@@ -1037,7 +1059,7 @@ function showPage(page){
 
 
     window.scrollTo({
-        top:0,
+        top:0
         behavior:"smooth"
     });
 
