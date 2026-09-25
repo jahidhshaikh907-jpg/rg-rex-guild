@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Guild Notebook</title>
+<title>RG REX - Guild Notebook</title>
 
 <style>
 *{
@@ -13,1379 +13,1900 @@
 }
 
 body{
-    font-family:Georgia,"Times New Roman",serif;
-    background:#151515;
-    color:#222;
+    font-family:Georgia,serif;
+    background:#17120d;
+    color:#30251b;
+    min-height:100vh;
 }
 
-/* TOP BAR */
-
+/* HEADER */
 header{
-    min-height:70px;
-    background:#101010;
-    color:white;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:12px 22px;
     position:sticky;
     top:0;
     z-index:50;
-    box-shadow:0 4px 20px #000;
+    background:#21180f;
+    color:#f4d7a1;
+    padding:14px 100px 14px 15px;
+    text-align:center;
+    border-bottom:3px solid #9b6b32;
 }
 
-.logo{
-    font-size:23px;
-    font-weight:bold;
-    letter-spacing:4px;
+header h1{
+    font-size:27px;
+    letter-spacing:3px;
 }
 
-nav{
-    display:flex;
-    flex-wrap:wrap;
-    gap:7px;
+header p{
+    margin-top:4px;
+    color:#c8a978;
 }
 
-nav button{
-    background:#222;
+#adminBtn{
+    position:absolute;
+    right:10px;
+    top:12px;
+    border:0;
+    border-radius:7px;
+    padding:9px 12px;
+    background:#9b6b32;
     color:white;
-    border:1px solid #555;
-    padding:9px 13px;
-    border-radius:20px;
+    font-weight:bold;
     cursor:pointer;
 }
 
-nav button:hover{
-    background:white;
-    color:#111;
+#adminBtn:hover{
+    background:#c28b45;
 }
 
+/* NAVIGATION */
+nav{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+    padding:10px;
+    background:#2b2015;
+}
+
+button{
+    border:0;
+    border-radius:7px;
+    padding:10px 14px;
+    background:#9b6b32;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#c28b45;
+}
 
 /* NOTEBOOK */
-
 .book{
     width:95%;
-    max-width:1050px;
-    min-height:720px;
-    margin:30px auto;
-    display:grid;
-    grid-template-columns:58px 1fr;
-
-    background:#e6d5af;
-
-    border-radius:10px 22px 22px 10px;
-
-    box-shadow:
-        0 25px 70px #000;
-
-    overflow:hidden;
+    max-width:1100px;
+    margin:24px auto;
+    display:flex;
+    background:#4b2d18;
+    padding:12px;
+    border-radius:10px;
+    box-shadow:0 10px 30px #000;
 }
 
-
-/* NOTEBOOK SPINE */
-
 .spine{
-    background:
-        linear-gradient(
-            90deg,
-            #21180f,
-            #745c3e,
-            #261c12
-        );
-
-    padding-top:30px;
+    width:48px;
+    background:#39210f;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-around;
+    align-items:center;
+    padding:15px 0;
+    border-radius:8px 0 0 8px;
 }
 
 .ring{
     width:25px;
     height:25px;
-
-    border:3px solid #aaa;
+    border:5px solid #aaa;
     border-radius:50%;
-
-    margin:28px auto;
-
-    box-shadow:
-        inset 0 3px 4px #444;
 }
 
-
-/* PAPER */
-
 .page{
-    min-height:720px;
-
-    padding:45px 50px;
-
+    flex:1;
+    padding:25px;
+    min-height:650px;
     background:
         repeating-linear-gradient(
             to bottom,
-            transparent 0,
-            transparent 31px,
-            #6f665333 32px
-        ),
-        #f0e3c3;
-
-    position:relative;
+            #f4e6c8 0,
+            #f4e6c8 31px,
+            #d9c8a5 32px
+        );
+    border-radius:0 8px 8px 0;
 }
 
-.page:after{
-    content:"";
-
-    position:absolute;
-    top:0;
-    right:18px;
-    bottom:0;
-
-    width:2px;
-
-    background:#a99772;
+/* SECTIONS */
+.section{
+    display:none;
 }
 
-
-/* HEADINGS */
-
-h1{
-    text-align:center;
-
-    font-size:44px;
-
-    letter-spacing:7px;
-
-    margin-top:15px;
+.section.active{
+    display:block;
 }
 
 h2{
     font-size:30px;
-
-    margin-bottom:15px;
+    margin-bottom:18px;
 }
 
-.subtitle{
-    text-align:center;
-
-    color:#665a47;
-
-    margin:15px 0 30px;
+.back{
+    margin-bottom:18px;
+    background:#6f4a25;
 }
 
-
-/* HOME IMAGE */
-
-.cover{
-    display:block;
-
-    width:230px;
-    height:230px;
-
-    object-fit:cover;
-
-    margin:10px auto 25px;
-
-    border:8px solid white;
-
-    box-shadow:
-        0 8px 22px #0005;
-
-    transform:rotate(-2deg);
-}
-
-
-/* BUTTONS */
-
-.buttons{
-    display:flex;
-
-    justify-content:center;
-
-    flex-wrap:wrap;
-
-    gap:12px;
-
-    margin-top:25px;
-}
-
-.action{
-    background:#171717;
-
-    color:white;
-
-    border:0;
-
-    padding:12px 20px;
-
-    border-radius:7px;
-
-    cursor:pointer;
-
-    box-shadow:0 3px 0 #000;
-}
-
-.action:hover{
-    transform:translateY(-2px);
-}
-
-
-/* MEMBERS */
-
-.members{
-    display:grid;
-
-    grid-template-columns:
-        repeat(auto-fit,minmax(190px,1fr));
-
-    gap:16px;
-}
-
-.member{
-    background:#fff9;
-
-    border:1px solid #9b8968;
-
-    border-radius:8px;
-
-    padding:20px;
-
-    box-shadow:2px 5px 10px #0002;
-}
-
-.member h3{
-    font-size:20px;
-
-    margin-bottom:8px;
-}
-
-.member p{
-    color:#6c604c;
-}
-
-
-/* NOTES */
-
-.note-area{
-    width:100%;
-
-    min-height:420px;
-
-    resize:vertical;
-
-    border:0;
-
-    outline:none;
-
-    background:
-        repeating-linear-gradient(
-            to bottom,
-            transparent 0,
-            transparent 31px,
-            #7774 32px
-        );
-
-    font-family:Georgia,serif;
-
-    font-size:18px;
-
-    line-height:32px;
-}
-
-.save{
-    margin-top:8px;
-
-    color:#315d37;
-
-    font-weight:bold;
-}
-
-
-/* GALLERY */
-
-.gallery{
-    columns:2 260px;
-
-    column-gap:16px;
-}
-
-.gallery img{
-    width:100%;
-
-    display:block;
-
-    margin-bottom:16px;
-
-    border:7px solid white;
-
-    box-shadow:2px 5px 12px #0005;
-
-    break-inside:avoid;
-
-    cursor:pointer;
-
-    transition:.2s;
-}
-
-.gallery img:hover{
-    transform:scale(1.015);
-}
-
-
-/* GVG */
-
-.gvg-controls{
-    display:flex;
-
-    gap:10px;
-
+/* EDITOR */
+.editor{
+    display:none;
+    background:#fff1d0;
+    border:2px solid #9c723f;
+    border-radius:10px;
+    padding:16px;
     margin-bottom:20px;
 }
 
-.gvg-card{
-    background:#fff9;
-
-    border:1px solid #9d8d6d;
-
-    border-left:6px solid #555;
-
-    border-radius:8px;
-
-    padding:20px;
-
-    margin-bottom:18px;
-
-    box-shadow:2px 5px 10px #0002;
+body.admin .editor{
+    display:block;
 }
 
-.gvg-card.win{
-    border-left-color:#2e7d32;
+.editor h3{
+    margin-bottom:10px;
 }
 
-.gvg-card.loss{
-    border-left-color:#a52b2b;
+.editor input,
+.editor textarea,
+.editor select{
+    width:100%;
+    padding:10px;
+    margin:5px 0;
+    border:1px solid #aa895f;
+    border-radius:6px;
+    font-family:inherit;
 }
 
-.gvg-top{
+.editor textarea{
+    min-height:100px;
+}
+
+.editor label{
+    display:block;
+    margin-top:8px;
+    font-weight:bold;
+}
+
+/* HOME */
+.cover{
+    text-align:center;
+    padding:15px;
+}
+
+.cover img{
+    width:100%;
+    max-width:600px;
+    height:300px;
+    object-fit:cover;
+    border:7px solid #6b431f;
+    border-radius:12px;
+    box-shadow:0 8px 20px #5b4630;
+}
+
+.cover h2{
+    font-size:42px;
+    margin-top:22px;
+}
+
+.cover p{
+    font-size:18px;
+    margin-bottom:20px;
+}
+
+.actions{
     display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:8px;
+}
 
-    justify-content:space-between;
-
-    align-items:center;
-
+/* CARDS */
+.grid{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(210px,1fr));
     gap:15px;
 }
 
-.gvg-top small{
-    color:#756951;
-
-    letter-spacing:2px;
+.card,
+.gvg{
+    background:#fff3d6;
+    border:2px solid #b58b55;
+    border-radius:10px;
+    padding:14px;
+    box-shadow:0 4px 10px #8e7657;
 }
 
-.gvg-top h3{
-    margin-top:6px;
-
-    font-size:21px;
-}
-
-.badge{
-    padding:7px 12px;
-
-    border-radius:20px;
-
-    font-size:12px;
-
-    font-weight:bold;
-
-    white-space:nowrap;
-}
-
-.upcoming{
-    background:#ddd0ad;
-}
-
-.win-badge{
-    background:#c9e5c9;
-
-    color:#205d25;
-}
-
-.loss-badge{
-    background:#eccaca;
-
-    color:#762020;
-}
-
-.gvg-info{
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:12px;
-
-    margin-top:20px;
-
-    padding-top:15px;
-
-    border-top:1px solid #9d8d6d;
-}
-
-.gvg-info b{
-    font-size:11px;
-
-    letter-spacing:1px;
-
-    color:#6c604c;
-}
-
-.gvg-note{
-    margin-top:15px;
-
-    color:#655b49;
-
-    font-style:italic;
-}
-
-
-/* GVG FORM */
-
-.form{
-    background:#ffffffaa;
-
-    border:1px solid #9d8d6d;
-
-    border-radius:8px;
-
-    padding:20px;
-
-    margin-bottom:20px;
-}
-
-.form input,
-.form select{
+.member-img{
     width:100%;
-
-    padding:11px;
-
-    margin:6px 0 12px;
-
-    border:1px solid #aaa;
-
-    border-radius:5px;
-
-    background:#fffdf5;
+    height:170px;
+    object-fit:cover;
+    border-radius:8px;
+    margin-bottom:8px;
 }
 
-.form label{
-    font-size:14px;
-
-    font-weight:bold;
+.delete{
+    background:#a63d32;
+    margin-top:10px;
 }
 
-
-/* MODAL */
-
-.modal{
-    position:fixed;
-
-    inset:0;
-
-    background:#000d;
-
-    display:none;
-
-    align-items:center;
-
-    justify-content:center;
-
-    z-index:100;
-
-    padding:20px;
+/* NOTES */
+.note{
+    width:100%;
+    min-height:350px;
+    padding:15px;
+    font:17px Georgia,serif;
+    background:#fff9e8;
+    border:2px solid #b58b55;
+    border-radius:10px;
+    resize:vertical;
 }
 
-.modal.show{
-    display:flex;
-}
-
-.modal img{
-    max-width:95vw;
-
-    max-height:90vh;
-
-    border:8px solid white;
-
-    box-shadow:0 20px 60px #000;
-}
-
-.close{
-    position:fixed;
-
-    right:20px;
-
-    top:15px;
-
-    width:42px;
-
-    height:42px;
-
-    border-radius:50%;
-
-    border:1px solid #777;
-
-    background:#222;
-
+/* GVG */
+.badge{
+    display:inline-block;
     color:white;
+    padding:5px 9px;
+    border-radius:5px;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:8px;
+}
 
-    font-size:25px;
+.WIN{
+    background:#3d8b40;
+}
 
+.LOSS{
+    background:#b43d35;
+}
+
+.UPCOMING{
+    background:#777;
+}
+
+/* GALLERY */
+.gallery{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(190px,1fr));
+    gap:14px;
+}
+
+.photoBox img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+    border:4px solid #8c6738;
+    border-radius:10px;
     cursor:pointer;
 }
 
-
-/* HIDDEN */
-
-.hidden{
-    display:none !important;
+/* MODAL */
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:100;
+    background:#000c;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
 }
 
+.modal img{
+    max-width:94%;
+    max-height:85%;
+    border:5px solid white;
+    border-radius:8px;
+}
+
+.close{
+    position:absolute;
+    right:20px;
+    top:10px;
+    color:white;
+    font-size:40px;
+    cursor:pointer;
+}
 
 /* MOBILE */
-
-@media(max-width:700px){
+@media(max-width:600px){
 
     header{
-        flex-direction:column;
-
-        align-items:flex-start;
-
-        gap:10px;
+        padding-right:95px;
     }
 
-    .logo{
-        font-size:19px;
+    header h1{
+        font-size:20px;
     }
 
-    nav button{
+    header p{
+        font-size:12px;
+    }
+
+    #adminBtn{
+        right:7px;
+        top:11px;
+        padding:8px 9px;
         font-size:11px;
-
-        padding:7px 9px;
     }
 
     .book{
         width:97%;
+        padding:6px;
+    }
 
-        grid-template-columns:35px 1fr;
+    .spine{
+        width:28px;
+    }
 
-        margin:15px auto;
+    .ring{
+        width:18px;
+        height:18px;
+        border-width:3px;
     }
 
     .page{
-        padding:30px 25px;
+        padding:17px;
     }
 
-    h1{
+    .cover img{
+        height:220px;
+    }
+
+    .cover h2{
         font-size:30px;
     }
 
-    .cover{
-        width:180px;
-
-        height:180px;
-    }
-
-    .gvg-info{
-        grid-template-columns:1fr;
-    }
-
-    .gvg-top{
-        align-items:flex-start;
-
-        flex-direction:column;
-    }
-
-    .gallery{
-        columns:1;
+    nav button{
+        padding:8px 10px;
+        font-size:12px;
     }
 }
 </style>
 </head>
 
-
 <body>
-
 
 <header>
 
-    <div class="logo">
-        GUILD NOTEBOOK
-    </div>
+    <h1 id="siteName">RG REX</h1>
 
-    <nav>
+    <p id="siteSubtitle">
+        Guild Notebook
+    </p>
 
-        <button onclick="showPage('home')">
-            Home
-        </button>
-
-        <button onclick="showPage('members')">
-            Members
-        </button>
-
-        <button onclick="showPage('notes')">
-            Notes
-        </button>
-
-        <button onclick="showPage('gvg')">
-            GVG
-        </button>
-
-        <button onclick="showPage('gallery')">
-            Gallery
-        </button>
-
-    </nav>
+    <button id="adminBtn" type="button">
+        ✏️ EDIT
+    </button>
 
 </header>
 
 
+<nav>
+
+    <button type="button" onclick="showPage('home')">
+        HOME
+    </button>
+
+    <button type="button" onclick="showPage('members')">
+        MEMBERS
+    </button>
+
+    <button type="button" onclick="showPage('notes')">
+        NOTES
+    </button>
+
+    <button type="button" onclick="showPage('gvg')">
+        GVG
+    </button>
+
+    <button type="button" onclick="showPage('gallery')">
+        GALLERY
+    </button>
+
+</nav>
+
 
 <div class="book">
 
-
-    <!-- NOTEBOOK SPINE -->
-
-    <aside class="spine">
-
+    <div class="spine">
         <div class="ring"></div>
         <div class="ring"></div>
         <div class="ring"></div>
         <div class="ring"></div>
         <div class="ring"></div>
-        <div class="ring"></div>
-        <div class="ring"></div>
-
-    </aside>
+    </div>
 
 
-
-    <main class="page">
+    <div class="page">
 
 
         <!-- HOME -->
+        <section id="home" class="section active">
 
-        <section id="home">
+            <div class="editor">
 
-            <img
-                class="cover"
-                src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=700&q=80"
-                alt="Guild"
-            >
+                <h3>✏️ Edit Home</h3>
 
-            <h1>
-                GUILD BOOK
-            </h1>
+                <input
+                    id="editName"
+                    type="text"
+                    placeholder="Guild Name"
+                >
 
-            <p class="subtitle">
-                OUR MEMBERS • OUR MEMORIES • OUR STORY
-            </p>
+                <input
+                    id="editSubtitle"
+                    type="text"
+                    placeholder="Subtitle"
+                >
 
+                <input
+                    id="editTitle"
+                    type="text"
+                    placeholder="Home Title"
+                >
 
-            <div class="buttons">
+                <textarea
+                    id="editDescription"
+                    placeholder="Description"
+                ></textarea>
+
+                <label>
+                    📷 Change Cover Photo
+                </label>
+
+                <input
+                    id="coverInput"
+                    type="file"
+                    accept="image/*"
+                >
 
                 <button
-                    class="action"
-                    onclick="showPage('members')"
+                    type="button"
+                    onclick="saveHome()"
                 >
-                    MEMBERS
-                </button>
-
-                <button
-                    class="action"
-                    onclick="showPage('notes')"
-                >
-                    MY NOTES
-                </button>
-
-                <button
-                    class="action"
-                    onclick="showPage('gvg')"
-                >
-                    GVG
-                </button>
-
-                <button
-                    class="action"
-                    onclick="showPage('gallery')"
-                >
-                    GALLERY
+                    SAVE HOME
                 </button>
 
             </div>
 
-        </section>
 
+            <div class="cover">
+
+                <img
+                    id="coverImage"
+                    src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80"
+                    alt="Guild Cover"
+                >
+
+                <h2 id="coverTitle">
+                    GUILD BOOK
+                </h2>
+
+                <p id="coverDescription">
+                    Welcome to the official RG REX Guild Notebook.
+                </p>
+
+                <div class="actions">
+
+                    <button onclick="showPage('members')">
+                        MEMBERS
+                    </button>
+
+                    <button onclick="showPage('notes')">
+                        NOTES
+                    </button>
+
+                    <button onclick="showPage('gvg')">
+                        GVG
+                    </button>
+
+                    <button onclick="showPage('gallery')">
+                        GALLERY
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
 
 
         <!-- MEMBERS -->
+        <section id="members" class="section">
 
-        <section
-            id="members"
-            class="hidden"
-        >
-
-            <h2>
-                Guild Members
-            </h2>
-
-            <p class="subtitle">
-                Our Guild Members
-            </p>
-
-
-            <div class="members">
-
-                <div class="member">
-                    <h3>Monster</h3>
-                    <p>Guild Member</p>
-                </div>
-
-                <div class="member">
-                    <h3>Bhai Jaan</h3>
-                    <p>Guild Member</p>
-                </div>
-
-                <div class="member">
-                    <h3>Swag</h3>
-                    <p>Guild Member</p>
-                </div>
-
-                <div class="member">
-                    <h3>Member 04</h3>
-                    <p>Guild Member</p>
-                </div>
-
-                <div class="member">
-                    <h3>Member 05</h3>
-                    <p>Guild Member</p>
-                </div>
-
-                <div class="member">
-                    <h3>Member 06</h3>
-                    <p>Guild Member</p>
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- NOTES -->
-
-        <section
-            id="notes"
-            class="hidden"
-        >
-
-            <h2>
-                Guild Notes
-            </h2>
-
-            <p class="subtitle">
-                Write your guild notes below.
-            </p>
-
-
-            <textarea
-                id="note"
-                class="note-area"
-                placeholder="Write something here..."
-            ></textarea>
-
-
-            <div
-                id="save"
-                class="save"
+            <button
+                class="back"
+                type="button"
+                onclick="showPage('home')"
             >
-                Notes are saved automatically.
-            </div>
-
-        </section>
+                ← BACK
+            </button>
 
 
+            <div class="editor">
 
-        <!-- GVG -->
+                <h3>➕ Add Member</h3>
 
-        <section
-            id="gvg"
-            class="hidden"
-        >
+                <input
+                    id="memberName"
+                    type="text"
+                    placeholder="Member Name"
+                >
 
-            <h2>
-                ⚔ GVG MATCH BOOK
-            </h2>
+                <input
+                    id="memberRole"
+                    type="text"
+                    placeholder="Member Role"
+                >
 
-            <p class="subtitle">
-                GUILD VS GUILD • MATCH HISTORY • UPCOMING BATTLES
-            </p>
+                <label>
+                    📷 Member Photo
+                </label>
 
-
-            <!-- ADD GVG -->
-
-            <div class="gvg-controls">
+                <input
+                    id="memberInput"
+                    type="file"
+                    accept="image/*"
+                >
 
                 <button
-                    class="action"
-                    onclick="toggleForm()"
+                    type="button"
+                    onclick="addMember()"
                 >
-                    + ADD GVG
+                    ADD MEMBER
                 </button>
 
             </div>
 
 
-            <div
-                id="gvgForm"
-                class="form hidden"
-            >
+            <h2>Guild Members</h2>
 
-                <label>
-                    Enemy Guild
-                </label>
+            <div
+                id="memberList"
+                class="grid"
+            ></div>
+
+        </section>
+
+
+        <!-- NOTES -->
+        <section id="notes" class="section">
+
+            <button
+                class="back"
+                type="button"
+                onclick="showPage('home')"
+            >
+                ← BACK
+            </button>
+
+            <h2>Guild Notes</h2>
+
+            <textarea
+                id="notesBox"
+                class="note"
+                placeholder="Click EDIT to write notes..."
+                readonly
+            ></textarea>
+
+            <p>
+                Notes are saved automatically.
+            </p>
+
+        </section>
+
+
+        <!-- GVG -->
+        <section id="gvg" class="section">
+
+            <button
+                class="back"
+                type="button"
+                onclick="showPage('home')"
+            >
+                ← BACK
+            </button>
+
+
+            <div class="editor">
+
+                <h3>⚔️ Add GVG</h3>
 
                 <input
-                    id="enemy"
-                    placeholder="Enemy Guild Name"
+                    id="enemyGuild"
+                    type="text"
+                    placeholder="Enemy Guild"
                 >
 
-
-                <label>
-                    Date
-                </label>
-
                 <input
-                    id="date"
+                    id="gvgDate"
                     type="date"
                 >
 
-
-                <label>
-                    Time
-                </label>
-
                 <input
-                    id="time"
+                    id="gvgTime"
                     type="time"
                 >
 
-
-                <label>
-                    Score
-                </label>
-
                 <input
-                    id="score"
-                    placeholder="10 - 7"
+                    id="gvgScore"
+                    type="text"
+                    placeholder="Score e.g. 10 - 8"
                 >
 
-
-                <label>
-                    Result
-                </label>
-
-                <select id="result">
+                <select id="gvgResult">
 
                     <option value="UPCOMING">
-                        Upcoming
+                        UPCOMING
                     </option>
 
                     <option value="WIN">
-                        Win
+                        WIN
                     </option>
 
                     <option value="LOSS">
-                        Loss
+                        LOSS
                     </option>
 
                 </select>
 
-
                 <button
-                    class="action"
+                    type="button"
                     onclick="addGVG()"
                 >
-                    SAVE GVG
+                    ADD GVG
                 </button>
 
             </div>
 
 
-            <!-- GVG LIST -->
+            <h2>GVG Battles</h2>
 
-            <div id="gvgList">
-
-
-                <div class="gvg-card">
-
-                    <div class="gvg-top">
-
-                        <div>
-
-                            <small>
-                                UPCOMING GVG
-                            </small>
-
-                            <h3>
-                                Our Guild VS Shadow Guild
-                            </h3>
-
-                        </div>
-
-                        <span class="badge upcoming">
-                            UPCOMING
-                        </span>
-
-                    </div>
-
-
-                    <div class="gvg-info">
-
-                        <div>
-                            <b>DATE</b><br>
-                            25 / 09 / 2026
-                        </div>
-
-                        <div>
-                            <b>TIME</b><br>
-                            8:00 PM
-                        </div>
-
-                        <div>
-                            <b>SCORE</b><br>
-                            -
-                        </div>
-
-                    </div>
-
-                    <div class="gvg-note">
-                        Prepare all members before the match.
-                    </div>
-
-                </div>
-
-
-
-                <div class="gvg-card win">
-
-                    <div class="gvg-top">
-
-                        <div>
-
-                            <small>
-                                GUILD WAR
-                            </small>
-
-                            <h3>
-                                Our Guild VS Dark Warriors
-                            </h3>
-
-                        </div>
-
-                        <span class="badge win-badge">
-                            WIN
-                        </span>
-
-                    </div>
-
-
-                    <div class="gvg-info">
-
-                        <div>
-                            <b>DATE</b><br>
-                            20 / 09 / 2026
-                        </div>
-
-                        <div>
-                            <b>TIME</b><br>
-                            8:00 PM
-                        </div>
-
-                        <div>
-                            <b>SCORE</b><br>
-                            10 - 7
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-
-                <div class="gvg-card loss">
-
-                    <div class="gvg-top">
-
-                        <div>
-
-                            <small>
-                                GUILD WAR
-                            </small>
-
-                            <h3>
-                                Our Guild VS Warriors
-                            </h3>
-
-                        </div>
-
-                        <span class="badge loss-badge">
-                            LOSS
-                        </span>
-
-                    </div>
-
-
-                    <div class="gvg-info">
-
-                        <div>
-                            <b>DATE</b><br>
-                            15 / 09 / 2026
-                        </div>
-
-                        <div>
-                            <b>TIME</b><br>
-                            9:00 PM
-                        </div>
-
-                        <div>
-                            <b>SCORE</b><br>
-                            6 - 10
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-            </div>
+            <div id="gvgList"></div>
 
         </section>
-
 
 
         <!-- GALLERY -->
+        <section id="gallery" class="section">
 
-        <section
-            id="gallery"
-            class="hidden"
-        >
-
-            <h2>
-                Guild Gallery
-            </h2>
-
-            <p class="subtitle">
-                Our Guild Memories
-            </p>
+            <button
+                class="back"
+                type="button"
+                onclick="showPage('home')"
+            >
+                ← BACK
+            </button>
 
 
-            <div class="gallery">
+            <div class="editor">
 
+                <h3>📷 Add Photo</h3>
 
-                <img
-                    src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80"
-                    onclick="openImage(this.src)"
+                <input
+                    id="galleryInput"
+                    type="file"
+                    accept="image/*"
                 >
 
-
-                <img
-                    src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=800&q=80"
-                    onclick="openImage(this.src)"
+                <button
+                    type="button"
+                    onclick="addGalleryPhoto()"
                 >
-
-
-                <img
-                    src="https://images.unsplash.com/photo-1506869640319-fe1a24fd76dc?auto=format&fit=crop&w=800&q=80"
-                    onclick="openImage(this.src)"
-                >
-
-
-                <img
-                    src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80"
-                    onclick="openImage(this.src)"
-                >
+                    ADD PHOTO
+                </button>
 
             </div>
 
+
+            <h2>Guild Gallery</h2>
+
+            <div
+                id="galleryList"
+                class="gallery"
+            ></div>
+
         </section>
 
-
-    </main>
+    </div>
 
 </div>
 
 
-
-<!-- IMAGE POPUP -->
-
+<!-- IMAGE MODAL -->
 <div
-    id="modal"
+    id="imageModal"
     class="modal"
-    onclick="closeImage()"
 >
 
-    <button
+    <span
+        id="closeModal"
         class="close"
-        onclick="closeImage()"
     >
         ×
-    </button>
+    </span>
 
-    <img
-        id="bigImage"
-        src=""
-        alt="Guild Photo"
-    >
+    <img id="modalImage" alt="Gallery Image">
 
 </div>
-
 
 
 <script>
 
-/* =========================
-   PAGE NAVIGATION
-========================= */
+/* =====================================================
+   DATA
+===================================================== */
 
-function showPage(name){
+const defaultData = {
 
-    const pages = [
-        "home",
-        "members",
-        "notes",
-        "gvg",
-        "gallery"
-    ];
+    name: "RG REX",
 
-    pages.forEach(function(id){
+    subtitle: "Guild Notebook",
 
-        document
-            .getElementById(id)
-            .classList.add("hidden");
+    title: "GUILD BOOK",
 
-    });
+    description:
+        "Welcome to the official RG REX Guild Notebook.",
 
-    document
-        .getElementById(name)
-        .classList.remove("hidden");
+    cover:
+        "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
 
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-}
+    notes: "",
+
+    members: [
+        {
+            name: "Monster",
+            role: "Guild Leader",
+            image: ""
+        },
+        {
+            name: "Bhai Jaan",
+            role: "Officer",
+            image: ""
+        },
+        {
+            name: "Swag",
+            role: "Member",
+            image: ""
+        }
+    ],
+
+    gvg: [],
+
+    gallery: []
+
+};
 
 
-/* =========================
-   NOTES
-========================= */
+/* =====================================================
+   LOAD DATA
+===================================================== */
 
-const note =
-    document.getElementById("note");
+let data;
 
-const savedNote =
-    localStorage.getItem("guildNote");
+try{
 
-if(savedNote){
+    const saved =
+        localStorage.getItem("RG_REX_GUILD_DATA");
 
-    note.value = savedNote;
+    if(saved){
 
-}
+        data = JSON.parse(saved);
 
-note.addEventListener(
-    "input",
-    function(){
+        data.members =
+            Array.isArray(data.members)
+            ? data.members
+            : [];
 
-        localStorage.setItem(
-            "guildNote",
-            note.value
+        data.gvg =
+            Array.isArray(data.gvg)
+            ? data.gvg
+            : [];
+
+        data.gallery =
+            Array.isArray(data.gallery)
+            ? data.gallery
+            : [];
+
+    }else{
+
+        data =
+            JSON.parse(
+                JSON.stringify(defaultData)
+            );
+
+    }
+
+}catch(error){
+
+    data =
+        JSON.parse(
+            JSON.stringify(defaultData)
         );
 
-        document
-            .getElementById("save")
-            .innerText =
-            "✓ Saved automatically";
+}
+
+
+/* =====================================================
+   ADMIN MODE
+===================================================== */
+
+let adminMode = false;
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const adminBtn =
+    document.getElementById("adminBtn");
+
+const siteName =
+    document.getElementById("siteName");
+
+const siteSubtitle =
+    document.getElementById("siteSubtitle");
+
+const coverImage =
+    document.getElementById("coverImage");
+
+const coverTitle =
+    document.getElementById("coverTitle");
+
+const coverDescription =
+    document.getElementById("coverDescription");
+
+const editName =
+    document.getElementById("editName");
+
+const editSubtitle =
+    document.getElementById("editSubtitle");
+
+const editTitle =
+    document.getElementById("editTitle");
+
+const editDescription =
+    document.getElementById("editDescription");
+
+const coverInput =
+    document.getElementById("coverInput");
+
+const notesBox =
+    document.getElementById("notesBox");
+
+const memberName =
+    document.getElementById("memberName");
+
+const memberRole =
+    document.getElementById("memberRole");
+
+const memberInput =
+    document.getElementById("memberInput");
+
+const memberList =
+    document.getElementById("memberList");
+
+const enemyGuild =
+    document.getElementById("enemyGuild");
+
+const gvgDate =
+    document.getElementById("gvgDate");
+
+const gvgTime =
+    document.getElementById("gvgTime");
+
+const gvgScore =
+    document.getElementById("gvgScore");
+
+const gvgResult =
+    document.getElementById("gvgResult");
+
+const gvgList =
+    document.getElementById("gvgList");
+
+const galleryInput =
+    document.getElementById("galleryInput");
+
+const galleryList =
+    document.getElementById("galleryList");
+
+const imageModal =
+    document.getElementById("imageModal");
+
+const modalImage =
+    document.getElementById("modalImage");
+
+const closeModal =
+    document.getElementById("closeModal");
+
+
+/* =====================================================
+   SAVE DATA
+===================================================== */
+
+function saveData(){
+
+    try{
+
+        localStorage.setItem(
+            "RG_REX_GUILD_DATA",
+            JSON.stringify(data)
+        );
+
+    }catch(error){
+
+        alert(
+            "Browser storage full. Try using smaller photos."
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   ADMIN BUTTON
+===================================================== */
+
+adminBtn.addEventListener(
+    "click",
+    function(){
+
+        adminMode =
+            !adminMode;
+
+
+        if(adminMode){
+
+            document.body.classList.add("admin");
+
+            adminBtn.textContent =
+                "🔒 LOCK";
+
+            notesBox.readOnly = false;
+
+            loadEditorValues();
+
+        }else{
+
+            document.body.classList.remove("admin");
+
+            adminBtn.textContent =
+                "✏️ EDIT";
+
+            notesBox.readOnly = true;
+
+        }
+
+
+        renderMembers();
+
+        renderGVG();
+
+        renderGallery();
 
     }
 );
 
 
-/* =========================
-   GVG FORM
-========================= */
+/* =====================================================
+   NAVIGATION
+===================================================== */
 
-function toggleForm(){
+function showPage(page){
 
     document
-        .getElementById("gvgForm")
-        .classList.toggle("hidden");
+        .querySelectorAll(".section")
+        .forEach(
+            function(section){
+
+                section.classList.remove("active");
+
+            }
+        );
+
+
+    const target =
+        document.getElementById(page);
+
+    if(target){
+
+        target.classList.add("active");
+
+    }
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
 
 }
 
 
-/* =========================
-   ADD GVG
-========================= */
+/* =====================================================
+   HOME
+===================================================== */
 
-function addGVG(){
+function renderHome(){
 
-    const enemy =
-        document.getElementById("enemy").value;
+    siteName.textContent =
+        data.name;
 
-    const date =
-        document.getElementById("date").value;
+    siteSubtitle.textContent =
+        data.subtitle;
 
-    const time =
-        document.getElementById("time").value;
+    coverTitle.textContent =
+        data.title;
 
-    const score =
-        document.getElementById("score").value;
+    coverDescription.textContent =
+        data.description;
 
-    const result =
-        document.getElementById("result").value;
+    coverImage.src =
+        data.cover;
+
+}
 
 
-    if(!enemy){
+function loadEditorValues(){
 
-        alert("Enemy Guild ka naam likho.");
+    editName.value =
+        data.name;
+
+    editSubtitle.value =
+        data.subtitle;
+
+    editTitle.value =
+        data.title;
+
+    editDescription.value =
+        data.description;
+
+}
+
+
+function saveHome(){
+
+    if(!adminMode){
+
+        return;
+
+    }
+
+    data.name =
+        editName.value.trim() ||
+        "RG REX";
+
+    data.subtitle =
+        editSubtitle.value.trim() ||
+        "Guild Notebook";
+
+    data.title =
+        editTitle.value.trim() ||
+        "GUILD BOOK";
+
+    data.description =
+        editDescription.value.trim();
+
+    saveData();
+
+    renderHome();
+
+}
+
+
+/* =====================================================
+   COVER IMAGE
+===================================================== */
+
+coverInput.addEventListener(
+    "change",
+    function(){
+
+        if(!adminMode){
+            return;
+        }
+
+        const file =
+            coverInput.files[0];
+
+        if(!file){
+            return;
+        }
+
+        const reader =
+            new FileReader();
+
+        reader.onload =
+            function(event){
+
+                data.cover =
+                    event.target.result;
+
+                saveData();
+
+                renderHome();
+
+            };
+
+        reader.readAsDataURL(file);
+
+    }
+);
+
+
+/* =====================================================
+   MEMBERS
+===================================================== */
+
+function renderMembers(){
+
+    memberList.innerHTML = "";
+
+    data.members.forEach(
+        function(member,index){
+
+            const card =
+                document.createElement("div");
+
+            card.className =
+                "card";
+
+
+            let photo = "";
+
+            if(member.image){
+
+                photo =
+                    `
+                    <img
+                        class="member-img"
+                        src="${member.image}"
+                        alt="Member Photo"
+                    >
+                    `;
+
+            }
+
+
+            let editArea = "";
+
+            if(adminMode){
+
+                editArea = `
+
+                    <div class="editor">
+
+                        <input
+                            value="${escapeAttribute(member.name)}"
+                            onchange="editMemberName(${index},this.value)"
+                        >
+
+                        <input
+                            value="${escapeAttribute(member.role)}"
+                            onchange="editMemberRole(${index},this.value)"
+                        >
+
+                        <input
+                            type="file"
+                            accept="image/*"
+                            onchange="changeMemberImage(${index},this)"
+                        >
+
+                    </div>
+
+                    <button
+                        class="delete"
+                        type="button"
+                        onclick="deleteMember(${index})"
+                    >
+                        DELETE
+                    </button>
+
+                `;
+
+            }
+
+
+            card.innerHTML = `
+
+                ${photo}
+
+                <h3>
+                    ${escapeHTML(member.name)}
+                </h3>
+
+                <p>
+                    ${escapeHTML(member.role)}
+                </p>
+
+                ${editArea}
+
+            `;
+
+
+            memberList.appendChild(card);
+
+        }
+    );
+
+}
+
+
+function addMember(){
+
+    if(!adminMode){
+        return;
+    }
+
+    const name =
+        memberName.value.trim();
+
+    const role =
+        memberRole.value.trim() ||
+        "Member";
+
+    const file =
+        memberInput.files[0];
+
+
+    if(!name){
+
+        alert(
+            "Enter member name."
+        );
 
         return;
 
     }
 
 
-    let badgeClass =
-        "upcoming";
+    if(file){
 
-    let cardClass =
-        "";
+        const reader =
+            new FileReader();
 
-    if(result === "WIN"){
+        reader.onload =
+            function(event){
 
-        badgeClass =
-            "win-badge";
+                data.members.push({
 
-        cardClass =
-            "win";
+                    name:name,
+
+                    role:role,
+
+                    image:event.target.result
+
+                });
+
+                saveData();
+
+                renderMembers();
+
+            };
+
+        reader.readAsDataURL(file);
+
+    }else{
+
+        data.members.push({
+
+            name:name,
+
+            role:role,
+
+            image:""
+
+        });
+
+        saveData();
+
+        renderMembers();
 
     }
 
-    if(result === "LOSS"){
 
-        badgeClass =
-            "loss-badge";
+    memberName.value = "";
 
-        cardClass =
-            "loss";
+    memberRole.value = "";
+
+    memberInput.value = "";
+
+}
+
+
+function editMemberName(index,value){
+
+    if(!adminMode){
+        return;
+    }
+
+    data.members[index].name =
+        value.trim();
+
+    saveData();
+
+    renderMembers();
+
+}
+
+
+function editMemberRole(index,value){
+
+    if(!adminMode){
+        return;
+    }
+
+    data.members[index].role =
+        value.trim();
+
+    saveData();
+
+    renderMembers();
+
+}
+
+
+function changeMemberImage(index,input){
+
+    if(!adminMode){
+        return;
+    }
+
+    const file =
+        input.files[0];
+
+    if(!file){
+        return;
+    }
+
+    const reader =
+        new FileReader();
+
+    reader.onload =
+        function(event){
+
+            data.members[index].image =
+                event.target.result;
+
+            saveData();
+
+            renderMembers();
+
+        };
+
+    reader.readAsDataURL(file);
+
+}
+
+
+function deleteMember(index){
+
+    if(!adminMode){
+        return;
+    }
+
+    if(
+        confirm(
+            "Delete this member?"
+        )
+    ){
+
+        data.members.splice(
+            index,
+            1
+        );
+
+        saveData();
+
+        renderMembers();
+
+    }
+
+}
+
+
+/* =====================================================
+   NOTES
+===================================================== */
+
+notesBox.value =
+    data.notes || "";
+
+
+notesBox.addEventListener(
+    "input",
+    function(){
+
+        if(!adminMode){
+            return;
+        }
+
+        data.notes =
+            notesBox.value;
+
+        saveData();
+
+    }
+);
+
+
+/* =====================================================
+   GVG
+===================================================== */
+
+function renderGVG(){
+
+    gvgList.innerHTML = "";
+
+
+    if(data.gvg.length === 0){
+
+        gvgList.innerHTML =
+            "<p>No GVG records yet.</p>";
+
+        return;
 
     }
 
 
-    const card =
-        document.createElement("div");
+    data.gvg.forEach(
+        function(match,index){
 
-    card.className =
-        "gvg-card " + cardClass;
+            const box =
+                document.createElement("div");
+
+            box.className =
+                "gvg";
 
 
-    card.innerHTML = `
+            let editArea = "";
 
-        <div class="gvg-top">
+            if(adminMode){
 
-            <div>
+                editArea = `
 
-                <small>
-                    GUILD WAR
-                </small>
+                    <div class="editor">
+
+                        <input
+                            value="${escapeAttribute(match.enemy)}"
+                            onchange="editGVG(${index},'enemy',this.value)"
+                        >
+
+                        <input
+                            type="date"
+                            value="${escapeAttribute(match.date)}"
+                            onchange="editGVG(${index},'date',this.value)"
+                        >
+
+                        <input
+                            type="time"
+                            value="${escapeAttribute(match.time)}"
+                            onchange="editGVG(${index},'time',this.value)"
+                        >
+
+                        <input
+                            value="${escapeAttribute(match.score)}"
+                            onchange="editGVG(${index},'score',this.value)"
+                        >
+
+                        <select
+                            onchange="editGVG(${index},'result',this.value)"
+                        >
+
+                            <option value="UPCOMING"
+                                ${match.result==="UPCOMING" ? "selected" : ""}>
+                                UPCOMING
+                            </option>
+
+                            <option value="WIN"
+                                ${match.result==="WIN" ? "selected" : ""}>
+                                WIN
+                            </option>
+
+                            <option value="LOSS"
+                                ${match.result==="LOSS" ? "selected" : ""}>
+                                LOSS
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <button
+                        class="delete"
+                        type="button"
+                        onclick="deleteGVG(${index})"
+                    >
+                        DELETE
+                    </button>
+
+                `;
+
+            }
+
+
+            box.innerHTML = `
+
+                <span class="badge ${escapeHTML(match.result)}">
+                    ${escapeHTML(match.result)}
+                </span>
 
                 <h3>
-                    Our Guild VS ${enemy}
+                    RG REX vs
+                    ${escapeHTML(match.enemy)}
                 </h3>
 
-            </div>
+                <p>
+                    Date:
+                    ${escapeHTML(match.date || "Not set")}
+                </p>
 
-            <span class="badge ${badgeClass}">
-                ${result}
-            </span>
+                <p>
+                    Time:
+                    ${escapeHTML(match.time || "Not set")}
+                </p>
 
-        </div>
+                <p>
+                    Score:
+                    ${escapeHTML(match.score || "Not set")}
+                </p>
 
+                ${editArea}
 
-        <div class="gvg-info">
-
-            <div>
-                <b>DATE</b><br>
-                ${date || "-"}
-            </div>
-
-            <div>
-                <b>TIME</b><br>
-                ${time || "-"}
-            </div>
-
-            <div>
-                <b>SCORE</b><br>
-                ${score || "-"}
-            </div>
-
-        </div>
-
-    `;
+            `;
 
 
-    document
-        .getElementById("gvgList")
-        .prepend(card);
+            gvgList.appendChild(box);
 
-
-    document
-        .getElementById("enemy")
-        .value = "";
-
-    document
-        .getElementById("date")
-        .value = "";
-
-    document
-        .getElementById("time")
-        .value = "";
-
-    document
-        .getElementById("score")
-        .value = "";
+        }
+    );
 
 }
 
 
-/* =========================
-   IMAGE VIEWER
-========================= */
+function addGVG(){
 
-function openImage(src){
+    if(!adminMode){
+        return;
+    }
 
-    document
-        .getElementById("bigImage")
-        .src = src;
+    const enemy =
+        enemyGuild.value.trim();
 
-    document
-        .getElementById("modal")
-        .classList.add("show");
+    if(!enemy){
+
+        alert(
+            "Enter enemy guild name."
+        );
+
+        return;
+
+    }
+
+
+    data.gvg.unshift({
+
+        enemy:enemy,
+
+        date:gvgDate.value,
+
+        time:gvgTime.value,
+
+        score:gvgScore.value.trim(),
+
+        result:gvgResult.value
+
+    });
+
+
+    saveData();
+
+    renderGVG();
+
+
+    enemyGuild.value = "";
+
+    gvgDate.value = "";
+
+    gvgTime.value = "";
+
+    gvgScore.value = "";
 
 }
 
 
-function closeImage(){
+function editGVG(index,key,value){
 
-    document
-        .getElementById("modal")
-        .classList.remove("show");
+    if(!adminMode){
+        return;
+    }
+
+    data.gvg[index][key] =
+        value;
+
+    saveData();
+
+    renderGVG();
 
 }
+
+
+function deleteGVG(index){
+
+    if(!adminMode){
+        return;
+    }
+
+    if(
+        confirm(
+            "Delete this GVG?"
+        )
+    ){
+
+        data.gvg.splice(
+            index,
+            1
+        );
+
+        saveData();
+
+        renderGVG();
+
+    }
+
+}
+
+
+/* =====================================================
+   GALLERY
+===================================================== */
+
+function renderGallery(){
+
+    galleryList.innerHTML = "";
+
+
+    if(data.gallery.length === 0){
+
+        galleryList.innerHTML =
+            "<p>No photos yet.</p>";
+
+        return;
+
+    }
+
+
+    data.gallery.forEach(
+        function(photo,index){
+
+            const box =
+                document.createElement("div");
+
+            box.className =
+                "photoBox";
+
+
+            box.innerHTML = `
+
+                <img
+                    src="${photo}"
+                    alt="Guild Photo"
+                    onclick="openModal(this.src)"
+                >
+
+                ${
+                    adminMode
+                    ?
+                    `
+                    <button
+                        class="delete"
+                        type="button"
+                        onclick="deleteGalleryPhoto(${index})"
+                    >
+                        DELETE
+                    </button>
+                    `
+                    :
+                    ""
+                }
+
+            `;
+
+
+            galleryList.appendChild(box);
+
+        }
+    );
+
+}
+
+
+function addGalleryPhoto(){
+
+    if(!adminMode){
+        return;
+    }
+
+    const file =
+        galleryInput.files[0];
+
+    if(!file){
+
+        alert(
+            "Select a photo first."
+        );
+
+        return;
+
+    }
+
+
+    const reader =
+        new FileReader();
+
+    reader.onload =
+        function(event){
+
+            data.gallery.push(
+                event.target.result
+            );
+
+            saveData();
+
+            renderGallery();
+
+            galleryInput.value = "";
+
+        };
+
+
+    reader.readAsDataURL(file);
+
+}
+
+
+function deleteGalleryPhoto(index){
+
+    if(!adminMode){
+        return;
+    }
+
+    if(
+        confirm(
+            "Delete this photo?"
+        )
+    ){
+
+        data.gallery.splice(
+            index,
+            1
+        );
+
+        saveData();
+
+        renderGallery();
+
+    }
+
+}
+
+
+/* =====================================================
+   IMAGE MODAL
+===================================================== */
+
+function openModal(src){
+
+    modalImage.src =
+        src;
+
+    imageModal.style.display =
+        "flex";
+
+}
+
+
+function closeImageModal(){
+
+    imageModal.style.display =
+        "none";
+
+}
+
+
+closeModal.addEventListener(
+    "click",
+    closeImageModal
+);
+
+
+imageModal.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target === imageModal
+        ){
+
+            closeImageModal();
+
+        }
+
+    }
+);
+
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key === "Escape"
+        ){
+
+            closeImageModal();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   SECURITY / HTML ESCAPE
+===================================================== */
+
+function escapeHTML(value){
+
+    return String(value ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+
+}
+
+
+function escapeAttribute(value){
+
+    return escapeHTML(value);
+
+}
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+renderHome();
+
+renderMembers();
+
+renderGVG();
+
+renderGallery();
 
 </script>
 
