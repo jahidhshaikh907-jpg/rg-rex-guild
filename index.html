@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guild Notebook</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Georgia,"Times New Roman",serif;
+    background:#151515;
+    color:#222;
+}
+
+/* TOP BAR */
+
+header{
+    min-height:70px;
+    background:#101010;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:12px 22px;
+    position:sticky;
+    top:0;
+    z-index:50;
+    box-shadow:0 4px 20px #000;
+}
+
+.logo{
+    font-size:23px;
+    font-weight:bold;
+    letter-spacing:4px;
+}
+
+nav{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+nav button{
+    background:#222;
+    color:white;
+    border:1px solid #555;
+    padding:9px 13px;
+    border-radius:20px;
+    cursor:pointer;
+}
+
+nav button:hover{
+    background:white;
+    color:#111;
+}
+
+
+/* NOTEBOOK */
+
+.book{
+    width:95%;
+    max-width:1050px;
+    min-height:720px;
+    margin:30px auto;
+    display:grid;
+    grid-template-columns:58px 1fr;
+
+    background:#e6d5af;
+
+    border-radius:10px 22px 22px 10px;
+
+    box-shadow:
+        0 25px 70px #000;
+
+    overflow:hidden;
+}
+
+
+/* NOTEBOOK SPINE */
+
+.spine{
+    background:
+        linear-gradient(
+            90deg,
+            #21180f,
+            #745c3e,
+            #261c12
+        );
+
+    padding-top:30px;
+}
+
+.ring{
+    width:25px;
+    height:25px;
+
+    border:3px solid #aaa;
+    border-radius:50%;
+
+    margin:28px auto;
+
+    box-shadow:
+        inset 0 3px 4px #444;
+}
+
+
+/* PAPER */
+
+.page{
+    min-height:720px;
+
+    padding:45px 50px;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0,
+            transparent 31px,
+            #6f665333 32px
+        ),
+        #f0e3c3;
+
+    position:relative;
+}
+
+.page:after{
+    content:"";
+
+    position:absolute;
+    top:0;
+    right:18px;
+    bottom:0;
+
+    width:2px;
+
+    background:#a99772;
+}
+
+
+/* HEADINGS */
+
+h1{
+    text-align:center;
+
+    font-size:44px;
+
+    letter-spacing:7px;
+
+    margin-top:15px;
+}
+
+h2{
+    font-size:30px;
+
+    margin-bottom:15px;
+}
+
+.subtitle{
+    text-align:center;
+
+    color:#665a47;
+
+    margin:15px 0 30px;
+}
+
+
+/* HOME IMAGE */
+
+.cover{
+    display:block;
+
+    width:230px;
+    height:230px;
+
+    object-fit:cover;
+
+    margin:10px auto 25px;
+
+    border:8px solid white;
+
+    box-shadow:
+        0 8px 22px #0005;
+
+    transform:rotate(-2deg);
+}
+
+
+/* BUTTONS */
+
+.buttons{
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+    margin-top:25px;
+}
+
+.action{
+    background:#171717;
+
+    color:white;
+
+    border:0;
+
+    padding:12px 20px;
+
+    border-radius:7px;
+
+    cursor:pointer;
+
+    box-shadow:0 3px 0 #000;
+}
+
+.action:hover{
+    transform:translateY(-2px);
+}
+
+
+/* MEMBERS */
+
+.members{
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(190px,1fr));
+
+    gap:16px;
+}
+
+.member{
+    background:#fff9;
+
+    border:1px solid #9b8968;
+
+    border-radius:8px;
+
+    padding:20px;
+
+    box-shadow:2px 5px 10px #0002;
+}
+
+.member h3{
+    font-size:20px;
+
+    margin-bottom:8px;
+}
+
+.member p{
+    color:#6c604c;
+}
+
+
+/* NOTES */
+
+.note-area{
+    width:100%;
+
+    min-height:420px;
+
+    resize:vertical;
+
+    border:0;
+
+    outline:none;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0,
+            transparent 31px,
+            #7774 32px
+        );
+
+    font-family:Georgia,serif;
+
+    font-size:18px;
+
+    line-height:32px;
+}
+
+.save{
+    margin-top:8px;
+
+    color:#315d37;
+
+    font-weight:bold;
+}
+
+
+/* GALLERY */
+
+.gallery{
+    columns:2 260px;
+
+    column-gap:16px;
+}
+
+.gallery img{
+    width:100%;
+
+    display:block;
+
+    margin-bottom:16px;
+
+    border:7px solid white;
+
+    box-shadow:2px 5px 12px #0005;
+
+    break-inside:avoid;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.gallery img:hover{
+    transform:scale(1.015);
+}
+
+
+/* GVG */
+
+.gvg-controls{
+    display:flex;
+
+    gap:10px;
+
+    margin-bottom:20px;
+}
+
+.gvg-card{
+    background:#fff9;
+
+    border:1px solid #9d8d6d;
+
+    border-left:6px solid #555;
+
+    border-radius:8px;
+
+    padding:20px;
+
+    margin-bottom:18px;
+
+    box-shadow:2px 5px 10px #0002;
+}
+
+.gvg-card.win{
+    border-left-color:#2e7d32;
+}
+
+.gvg-card.loss{
+    border-left-color:#a52b2b;
+}
+
+.gvg-top{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:15px;
+}
+
+.gvg-top small{
+    color:#756951;
+
+    letter-spacing:2px;
+}
+
+.gvg-top h3{
+    margin-top:6px;
+
+    font-size:21px;
+}
+
+.badge{
+    padding:7px 12px;
+
+    border-radius:20px;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    white-space:nowrap;
+}
+
+.upcoming{
+    background:#ddd0ad;
+}
+
+.win-badge{
+    background:#c9e5c9;
+
+    color:#205d25;
+}
+
+.loss-badge{
+    background:#eccaca;
+
+    color:#762020;
+}
+
+.gvg-info{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:12px;
+
+    margin-top:20px;
+
+    padding-top:15px;
+
+    border-top:1px solid #9d8d6d;
+}
+
+.gvg-info b{
+    font-size:11px;
+
+    letter-spacing:1px;
+
+    color:#6c604c;
+}
+
+.gvg-note{
+    margin-top:15px;
+
+    color:#655b49;
+
+    font-style:italic;
+}
+
+
+/* GVG FORM */
+
+.form{
+    background:#ffffffaa;
+
+    border:1px solid #9d8d6d;
+
+    border-radius:8px;
+
+    padding:20px;
+
+    margin-bottom:20px;
+}
+
+.form input,
+.form select{
+    width:100%;
+
+    padding:11px;
+
+    margin:6px 0 12px;
+
+    border:1px solid #aaa;
+
+    border-radius:5px;
+
+    background:#fffdf5;
+}
+
+.form label{
+    font-size:14px;
+
+    font-weight:bold;
+}
+
+
+/* MODAL */
+
+.modal{
+    position:fixed;
+
+    inset:0;
+
+    background:#000d;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    z-index:100;
+
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal img{
+    max-width:95vw;
+
+    max-height:90vh;
+
+    border:8px solid white;
+
+    box-shadow:0 20px 60px #000;
+}
+
+.close{
+    position:fixed;
+
+    right:20px;
+
+    top:15px;
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
+
+    border:1px solid #777;
+
+    background:#222;
+
+    color:white;
+
+    font-size:25px;
+
+    cursor:pointer;
+}
+
+
+/* HIDDEN */
+
+.hidden{
+    display:none !important;
+}
+
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+    header{
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:10px;
+    }
+
+    .logo{
+        font-size:19px;
+    }
+
+    nav button{
+        font-size:11px;
+
+        padding:7px 9px;
+    }
+
+    .book{
+        width:97%;
+
+        grid-template-columns:35px 1fr;
+
+        margin:15px auto;
+    }
+
+    .page{
+        padding:30px 25px;
+    }
+
+    h1{
+        font-size:30px;
+    }
+
+    .cover{
+        width:180px;
+
+        height:180px;
+    }
+
+    .gvg-info{
+        grid-template-columns:1fr;
+    }
+
+    .gvg-top{
+        align-items:flex-start;
+
+        flex-direction:column;
+    }
+
+    .gallery{
+        columns:1;
+    }
+}
+</style>
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+        GUILD NOTEBOOK
+    </div>
+
+    <nav>
+
+        <button onclick="showPage('home')">
+            Home
+        </button>
+
+        <button onclick="showPage('members')">
+            Members
+        </button>
+
+        <button onclick="showPage('notes')">
+            Notes
+        </button>
+
+        <button onclick="showPage('gvg')">
+            GVG
+        </button>
+
+        <button onclick="showPage('gallery')">
+            Gallery
+        </button>
+
+    </nav>
+
+</header>
+
+
+
+<div class="book">
+
+
+    <!-- NOTEBOOK SPINE -->
+
+    <aside class="spine">
+
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="ring"></div>
+
+    </aside>
+
+
+
+    <main class="page">
+
+
+        <!-- HOME -->
+
+        <section id="home">
+
+            <img
+                class="cover"
+                src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=700&q=80"
+                alt="Guild"
+            >
+
+            <h1>
+                GUILD BOOK
+            </h1>
+
+            <p class="subtitle">
+                OUR MEMBERS • OUR MEMORIES • OUR STORY
+            </p>
+
+
+            <div class="buttons">
+
+                <button
+                    class="action"
+                    onclick="showPage('members')"
+                >
+                    MEMBERS
+                </button>
+
+                <button
+                    class="action"
+                    onclick="showPage('notes')"
+                >
+                    MY NOTES
+                </button>
+
+                <button
+                    class="action"
+                    onclick="showPage('gvg')"
+                >
+                    GVG
+                </button>
+
+                <button
+                    class="action"
+                    onclick="showPage('gallery')"
+                >
+                    GALLERY
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- MEMBERS -->
+
+        <section
+            id="members"
+            class="hidden"
+        >
+
+            <h2>
+                Guild Members
+            </h2>
+
+            <p class="subtitle">
+                Our Guild Members
+            </p>
+
+
+            <div class="members">
+
+                <div class="member">
+                    <h3>Monster</h3>
+                    <p>Guild Member</p>
+                </div>
+
+                <div class="member">
+                    <h3>Bhai Jaan</h3>
+                    <p>Guild Member</p>
+                </div>
+
+                <div class="member">
+                    <h3>Swag</h3>
+                    <p>Guild Member</p>
+                </div>
+
+                <div class="member">
+                    <h3>Member 04</h3>
+                    <p>Guild Member</p>
+                </div>
+
+                <div class="member">
+                    <h3>Member 05</h3>
+                    <p>Guild Member</p>
+                </div>
+
+                <div class="member">
+                    <h3>Member 06</h3>
+                    <p>Guild Member</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- NOTES -->
+
+        <section
+            id="notes"
+            class="hidden"
+        >
+
+            <h2>
+                Guild Notes
+            </h2>
+
+            <p class="subtitle">
+                Write your guild notes below.
+            </p>
+
+
+            <textarea
+                id="note"
+                class="note-area"
+                placeholder="Write something here..."
+            ></textarea>
+
+
+            <div
+                id="save"
+                class="save"
+            >
+                Notes are saved automatically.
+            </div>
+
+        </section>
+
+
+
+        <!-- GVG -->
+
+        <section
+            id="gvg"
+            class="hidden"
+        >
+
+            <h2>
+                ⚔ GVG MATCH BOOK
+            </h2>
+
+            <p class="subtitle">
+                GUILD VS GUILD • MATCH HISTORY • UPCOMING BATTLES
+            </p>
+
+
+            <!-- ADD GVG -->
+
+            <div class="gvg-controls">
+
+                <button
+                    class="action"
+                    onclick="toggleForm()"
+                >
+                    + ADD GVG
+                </button>
+
+            </div>
+
+
+            <div
+                id="gvgForm"
+                class="form hidden"
+            >
+
+                <label>
+                    Enemy Guild
+                </label>
+
+                <input
+                    id="enemy"
+                    placeholder="Enemy Guild Name"
+                >
+
+
+                <label>
+                    Date
+                </label>
+
+                <input
+                    id="date"
+                    type="date"
+                >
+
+
+                <label>
+                    Time
+                </label>
+
+                <input
+                    id="time"
+                    type="time"
+                >
+
+
+                <label>
+                    Score
+                </label>
+
+                <input
+                    id="score"
+                    placeholder="10 - 7"
+                >
+
+
+                <label>
+                    Result
+                </label>
+
+                <select id="result">
+
+                    <option value="UPCOMING">
+                        Upcoming
+                    </option>
+
+                    <option value="WIN">
+                        Win
+                    </option>
+
+                    <option value="LOSS">
+                        Loss
+                    </option>
+
+                </select>
+
+
+                <button
+                    class="action"
+                    onclick="addGVG()"
+                >
+                    SAVE GVG
+                </button>
+
+            </div>
+
+
+            <!-- GVG LIST -->
+
+            <div id="gvgList">
+
+
+                <div class="gvg-card">
+
+                    <div class="gvg-top">
+
+                        <div>
+
+                            <small>
+                                UPCOMING GVG
+                            </small>
+
+                            <h3>
+                                Our Guild VS Shadow Guild
+                            </h3>
+
+                        </div>
+
+                        <span class="badge upcoming">
+                            UPCOMING
+                        </span>
+
+                    </div>
+
+
+                    <div class="gvg-info">
+
+                        <div>
+                            <b>DATE</b><br>
+                            25 / 09 / 2026
+                        </div>
+
+                        <div>
+                            <b>TIME</b><br>
+                            8:00 PM
+                        </div>
+
+                        <div>
+                            <b>SCORE</b><br>
+                            -
+                        </div>
+
+                    </div>
+
+                    <div class="gvg-note">
+                        Prepare all members before the match.
+                    </div>
+
+                </div>
+
+
+
+                <div class="gvg-card win">
+
+                    <div class="gvg-top">
+
+                        <div>
+
+                            <small>
+                                GUILD WAR
+                            </small>
+
+                            <h3>
+                                Our Guild VS Dark Warriors
+                            </h3>
+
+                        </div>
+
+                        <span class="badge win-badge">
+                            WIN
+                        </span>
+
+                    </div>
+
+
+                    <div class="gvg-info">
+
+                        <div>
+                            <b>DATE</b><br>
+                            20 / 09 / 2026
+                        </div>
+
+                        <div>
+                            <b>TIME</b><br>
+                            8:00 PM
+                        </div>
+
+                        <div>
+                            <b>SCORE</b><br>
+                            10 - 7
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="gvg-card loss">
+
+                    <div class="gvg-top">
+
+                        <div>
+
+                            <small>
+                                GUILD WAR
+                            </small>
+
+                            <h3>
+                                Our Guild VS Warriors
+                            </h3>
+
+                        </div>
+
+                        <span class="badge loss-badge">
+                            LOSS
+                        </span>
+
+                    </div>
+
+
+                    <div class="gvg-info">
+
+                        <div>
+                            <b>DATE</b><br>
+                            15 / 09 / 2026
+                        </div>
+
+                        <div>
+                            <b>TIME</b><br>
+                            9:00 PM
+                        </div>
+
+                        <div>
+                            <b>SCORE</b><br>
+                            6 - 10
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- GALLERY -->
+
+        <section
+            id="gallery"
+            class="hidden"
+        >
+
+            <h2>
+                Guild Gallery
+            </h2>
+
+            <p class="subtitle">
+                Our Guild Memories
+            </p>
+
+
+            <div class="gallery">
+
+
+                <img
+                    src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80"
+                    onclick="openImage(this.src)"
+                >
+
+
+                <img
+                    src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=800&q=80"
+                    onclick="openImage(this.src)"
+                >
+
+
+                <img
+                    src="https://images.unsplash.com/photo-1506869640319-fe1a24fd76dc?auto=format&fit=crop&w=800&q=80"
+                    onclick="openImage(this.src)"
+                >
+
+
+                <img
+                    src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80"
+                    onclick="openImage(this.src)"
+                >
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+
+<!-- IMAGE POPUP -->
+
+<div
+    id="modal"
+    class="modal"
+    onclick="closeImage()"
+>
+
+    <button
+        class="close"
+        onclick="closeImage()"
+    >
+        ×
+    </button>
+
+    <img
+        id="bigImage"
+        src=""
+        alt="Guild Photo"
+    >
+
+</div>
+
+
+
+<script>
+
+/* =========================
+   PAGE NAVIGATION
+========================= */
+
+function showPage(name){
+
+    const pages = [
+        "home",
+        "members",
+        "notes",
+        "gvg",
+        "gallery"
+    ];
+
+    pages.forEach(function(id){
+
+        document
+            .getElementById(id)
+            .classList.add("hidden");
+
+    });
+
+    document
+        .getElementById(name)
+        .classList.remove("hidden");
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+
+/* =========================
+   NOTES
+========================= */
+
+const note =
+    document.getElementById("note");
+
+const savedNote =
+    localStorage.getItem("guildNote");
+
+if(savedNote){
+
+    note.value = savedNote;
+
+}
+
+note.addEventListener(
+    "input",
+    function(){
+
+        localStorage.setItem(
+            "guildNote",
+            note.value
+        );
+
+        document
+            .getElementById("save")
+            .innerText =
+            "✓ Saved automatically";
+
+    }
+);
+
+
+/* =========================
+   GVG FORM
+========================= */
+
+function toggleForm(){
+
+    document
+        .getElementById("gvgForm")
+        .classList.toggle("hidden");
+
+}
+
+
+/* =========================
+   ADD GVG
+========================= */
+
+function addGVG(){
+
+    const enemy =
+        document.getElementById("enemy").value;
+
+    const date =
+        document.getElementById("date").value;
+
+    const time =
+        document.getElementById("time").value;
+
+    const score =
+        document.getElementById("score").value;
+
+    const result =
+        document.getElementById("result").value;
+
+
+    if(!enemy){
+
+        alert("Enemy Guild ka naam likho.");
+
+        return;
+
+    }
+
+
+    let badgeClass =
+        "upcoming";
+
+    let cardClass =
+        "";
+
+    if(result === "WIN"){
+
+        badgeClass =
+            "win-badge";
+
+        cardClass =
+            "win";
+
+    }
+
+    if(result === "LOSS"){
+
+        badgeClass =
+            "loss-badge";
+
+        cardClass =
+            "loss";
+
+    }
+
+
+    const card =
+        document.createElement("div");
+
+    card.className =
+        "gvg-card " + cardClass;
+
+
+    card.innerHTML = `
+
+        <div class="gvg-top">
+
+            <div>
+
+                <small>
+                    GUILD WAR
+                </small>
+
+                <h3>
+                    Our Guild VS ${enemy}
+                </h3>
+
+            </div>
+
+            <span class="badge ${badgeClass}">
+                ${result}
+            </span>
+
+        </div>
+
+
+        <div class="gvg-info">
+
+            <div>
+                <b>DATE</b><br>
+                ${date || "-"}
+            </div>
+
+            <div>
+                <b>TIME</b><br>
+                ${time || "-"}
+            </div>
+
+            <div>
+                <b>SCORE</b><br>
+                ${score || "-"}
+            </div>
+
+        </div>
+
+    `;
+
+
+    document
+        .getElementById("gvgList")
+        .prepend(card);
+
+
+    document
+        .getElementById("enemy")
+        .value = "";
+
+    document
+        .getElementById("date")
+        .value = "";
+
+    document
+        .getElementById("time")
+        .value = "";
+
+    document
+        .getElementById("score")
+        .value = "";
+
+}
+
+
+/* =========================
+   IMAGE VIEWER
+========================= */
+
+function openImage(src){
+
+    document
+        .getElementById("bigImage")
+        .src = src;
+
+    document
+        .getElementById("modal")
+        .classList.add("show");
+
+}
+
+
+function closeImage(){
+
+    document
+        .getElementById("modal")
+        .classList.remove("show");
+
+}
+
+</script>
+
+</body>
+</html>
