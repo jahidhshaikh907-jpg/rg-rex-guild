@@ -946,23 +946,21 @@ const closeModal =
 
 function saveData(){
 
-    try{
-
-        localStorage.setItem(
-            "RG_REX_GUILD_DATA",
-            JSON.stringify(data)
-        );
-
-    }catch(error){
-
-        alert(
-            "Browser storage full. Try using smaller photos."
-        );
-
+    if(typeof dbRef === "undefined"){
+        alert("Firebase connection not ready.");
+        return;
     }
 
-}
+    dbRef.set(data)
+        .then(function(){
+            console.log("✅ Data saved to Firebase");
+        })
+        .catch(function(error){
+            console.error("Firebase save error:", error);
+            alert("❌ Data save nahi hua.");
+        });
 
+}
 
 /* =====================================================
    ADMIN BUTTON
