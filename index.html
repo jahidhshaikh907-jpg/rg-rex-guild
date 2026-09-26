@@ -995,10 +995,13 @@ function saveData(){
     })
     .catch(function(error){
 
-        console.error("Firebase Login Error:", error);
-        alert("❌ Login failed.\nEmail ya password check karo.");
+    console.error("Firebase Login Error:", error);
 
-    });
+    alert(
+        "❌ Login failed\n\n" +
+        "Error Code: " + error.code + "\n" +
+        "Message: " + error.message
+    );
 
 });
             
