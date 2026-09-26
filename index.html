@@ -381,7 +381,34 @@ body.admin .editor{
         font-size:12px;
     }
 }
-</style>
+    </style>
+
+<!-- FIREBASE START -->
+<script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-database-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+    apiKey: "AIzaSyCR_Lnu1NdJK7sLaLU1hz_3ZpuVAAxQqD4",
+    authDomain: "rg-nexus-c2430.firebaseapp.com",
+    databaseURL: "https://rg-nexus-c2430-default-rtdb.firebaseio.com",
+    projectId: "rg-nexus-c2430",
+    storageBucket: "rg-nexus-c2430.firebasestorage.app",
+    messagingSenderId: "841271828773",
+    appId: "1:841271828773:web:26ef23d32da5ae5defbacc"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+const db = firebase.database();
+const dbRef = db.ref("rgNexus/data");
+
+const ADMIN_UID = "AlYyBPeeoeYUsu4DlwdOFNY14gg2";
+</script>
+<!-- FIREBASE END -->
+
 </head>
 
 <body>
