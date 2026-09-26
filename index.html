@@ -1995,6 +1995,382 @@ dbRef.on("value", function(snapshot){
 });
 
 </script>
+<!-- ================= CHAT SYSTEM START ================= -->
 
+<style>
+#chat{
+    padding:15px;
+}
+
+#chat h2{
+    text-align:center;
+    margin-bottom:15px;
+}
+
+#chatMessages{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    margin-bottom:15px;
+}
+
+.chatMessage{
+    background:#3b2415;
+    color:white;
+    padding:12px;
+    border-radius:12px;
+    box-shadow:0 3px 10px #0005;
+}
+
+.chatUser{
+    font-weight:bold;
+    font-size:16px;
+    margin-bottom:7px;
+}
+
+.chatText{
+    margin:8px 0;
+    word-wrap:break-word;
+}
+
+.chatImage{
+    width:100%;
+    max-width:300px;
+    max-height:300px;
+    object-fit:cover;
+    border-radius:10px;
+    display:block;
+    margin:8px 0;
+}
+
+.chatDelete{
+    background:#d32f2f !important;
+    color:white !important;
+    padding:7px 12px !important;
+    border-radius:7px !important;
+    border:0 !important;
+}
+
+.chatBox{
+    background:#2b2015;
+    padding:12px;
+    border-radius:12px;
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+}
+
+.chatBox input,
+.chatBox textarea{
+    width:100%;
+    box-sizing:border-box;
+    padding:11px;
+    border:0;
+    border-radius:8px;
+    font-size:15px;
+}
+
+.chatBox textarea{
+    min-height:80px;
+    resize:vertical;
+}
+
+.chatSend{
+    background:#9b6b32 !important;
+    color:white !important;
+}
+</style>
+
+<script>
+/* ================= CHAT PAGE ================= */
+
+(function(){
+
+    /* CHAT BUTTON */
+    const nav = document.querySelector("nav");
+
+    if(nav && !document.getElementById("chatNavBtn")){
+
+        const chatButton = document.createElement("button");
+
+        chatButton.id = "chatNavBtn";
+        chatButton.type = "button";
+        chatButton.textContent = "💬 CHAT";
+
+        chatButton.onclick = function(){
+            showPage("chat");
+        };
+
+        nav.appendChild(chatButton);
+    }
+
+
+    /* CHAT PAGE */
+    if(!document.getElementById("chat")){
+
+        const chatSection = document.createElement("section");
+
+        chatSection.id = "chat";
+        chatSection.className = "section";
+
+        chatSection.innerHTML = `
+            <h2>💬 GUILD CHAT</h2>
+
+            <div id="chatMessages">
+                <p style="text-align:center;">
+                    Loading messages...
+                </p>
+            </div>
+
+            <div class="chatBox">
+
+                <input
+                    id="chatName"
+                    type="text"
+                    placeholder="👤 Your Name"
+                    maxlength="30"
+                >
+
+                <input
+                    id="chatPhoto"
+                    type="file"
+                    accept="image/*"
+                >
+
+                <textarea
+                    id="chatText"
+                    placeholder="💬 Write a message..."
+                    maxlength="500"
+                ></textarea>
+
+                <button
+                    type="button"
+                    class="chatSend"
+                    onclick="sendChatMessage()">
+                    📤 SEND
+                </button>
+
+            </div>
+        `;
+
+        const page = document.querySelector(".page");
+
+        if(page){
+            page.appendChild(chatSection);
+        }
+    }
+
+
+    /* FIREBASE CHAT */
+    if(typeof db !== "undefined"){
+
+        window.chatRef = db.ref("chatMessages");
+
+        chatRef.on("value", function(snapshot){
+
+            const box =
+                document.getElementById("chatMessages");
+
+            if(!box) return;
+
+            box.innerHTML = "";
+
+            if(!snapshot.exists()){
+
+                box.innerHTML =
+                    '<p style="text-align:center;">💬 No messages yet.</p>';
+
+                return;
+            }
+
+            snapshot.forEach(function(child){
+
+                const msg = child.val();
+
+                const div =
+                    document.createElement("div");
+
+                div.className = "chatMessage";
+
+                const user =
+                    document.createElement("div");
+
+                user.className = "chatUser";
+
+                user.textContent =
+                    "👤 " + (msg.name || "Unknown");
+
+                div.appendChild(user);
+
+
+                if(msg.photo){
+
+                    const img =
+                        document.createElement("img");
+
+                    img.className = "chatImage";
+                    img.src = msg.photo;
+
+                    div.appendChild(img);
+                }
+
+
+                if(msg.text){
+
+                    const text =
+                        document.createElement("div");
+
+                    text.className = "chatText";
+
+                    text.textContent = msg.text;
+
+                    div.appendChild(text);
+                }
+
+
+                const deleteButton =
+                    document.createElement("button");
+
+                deleteButton.className =
+                    "chatDelete";
+
+                deleteButton.type = "button";
+
+                deleteButton.textContent =
+                    "🗑️ DELETE";
+
+                deleteButton.onclick =
+                    function(){
+
+                        if(
+                            confirm(
+                                "Delete this message?"
+                            )
+                        ){
+
+                            chatRef
+                                .child(child.key)
+                                .remove();
+
+                        }
+                    };
+
+                div.appendChild(deleteButton);
+
+                box.appendChild(div);
+
+            });
+
+        });
+
+    }
+
+})();
+
+
+/* SEND MESSAGE */
+
+window.sendChatMessage = function(){
+
+    if(typeof chatRef === "undefined"){
+
+        alert("❌ Chat Firebase connection nahi hai.");
+
+        return;
+    }
+
+
+    const nameInput =
+        document.getElementById("chatName");
+
+    const textInput =
+        document.getElementById("chatText");
+
+    const photoInput =
+        document.getElementById("chatPhoto");
+
+
+    const name =
+        nameInput.value.trim();
+
+    const text =
+        textInput.value.trim();
+
+    const file =
+        photoInput.files[0];
+
+
+    if(!name){
+
+        alert("👤 Apna name enter karo.");
+
+        return;
+    }
+
+
+    if(!text && !file){
+
+        alert("💬 Message ya photo add karo.");
+
+        return;
+    }
+
+
+    function saveMessage(photo){
+
+        chatRef.push({
+
+            name:name,
+
+            text:text,
+
+            photo:photo || "",
+
+            time:Date.now()
+
+        });
+
+        textInput.value = "";
+        photoInput.value = "";
+    }
+
+
+    if(file){
+
+        if(file.size > 2 * 1024 * 1024){
+
+            alert(
+                "⚠️ Photo 2 MB se chhoti rakho."
+            );
+
+            return;
+        }
+
+
+        const reader =
+            new FileReader();
+
+        reader.onload =
+            function(event){
+
+                saveMessage(
+                    event.target.result
+                );
+
+            };
+
+        reader.readAsDataURL(file);
+
+    }else{
+
+        saveMessage("");
+
+    }
+
+};
+
+</script>
+
+<!-- ================= CHAT SYSTEM END ================= -->
 </body>
 </html>
