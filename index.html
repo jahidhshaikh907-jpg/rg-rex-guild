@@ -853,6 +853,27 @@ function normalizeData(value){
     return value;
 }
 
+dbRef.on("value", function(snapshot){
+
+    const remoteData = snapshot.val();
+
+    data = normalizeData(remoteData);
+
+    firebaseReady = true;
+
+    renderHome();
+    renderMembers();
+    renderGVG();
+    renderGallery();
+
+    notesBox.value = data.notes || "";
+
+}, function(error){
+
+    console.error("Firebase read error:", error);
+
+});
+
 
 /* =====================================================
    ADMIN MODE
