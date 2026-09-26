@@ -802,48 +802,28 @@ const defaultData = {
    LOAD DATA
 ===================================================== */
 
-let data;
+let data = JSON.parse(JSON.stringify(defaultData));
+let firebaseReady = false;
 
-try{
+function normalizeData(value){
 
-    const saved =
-        localStorage.getItem("RG_REX_GUILD_DATA");
-
-    if(saved){
-
-        data = JSON.parse(saved);
-
-        data.members =
-            Array.isArray(data.members)
-            ? data.members
-            : [];
-
-        data.gvg =
-            Array.isArray(data.gvg)
-            ? data.gvg
-            : [];
-
-        data.gallery =
-            Array.isArray(data.gallery)
-            ? data.gallery
-            : [];
-
-    }else{
-
-        data =
-            JSON.parse(
-                JSON.stringify(defaultData)
-            );
-
+    if(!value){
+        return JSON.parse(JSON.stringify(defaultData));
     }
 
-}catch(error){
+    value.members = Array.isArray(value.members)
+        ? value.members
+        : [];
 
-    data =
-        JSON.parse(
-            JSON.stringify(defaultData)
-        );
+    value.gvg = Array.isArray(value.gvg)
+        ? value.gvg
+        : [];
 
+    value.gallery = Array.isArray(value.gallery)
+        ? value.gallery
+        : [];
+
+    return value;
 }
 
 
@@ -946,8 +926,8 @@ const closeModal =
 
 function saveData(){
 
-    if(typeof dbRef === "undefined"){
-        alert("Firebase connection not ready.");
+    if(!auth.currentUser || auth.currentUser.uid !== ADMIN_UID){
+        alert("🔐 Admin login required.");
         return;
     }
 
@@ -959,72 +939,68 @@ function saveData(){
             console.error("Firebase save error:", error);
             alert("❌ Data save nahi hua.");
         });
-
 }
 
 /* =====================================================
    ADMIN BUTTON
 ===================================================== */
-   adminBtn.addEventListener(
-    "click",
-    function(){
+   adminBtn.addEventListener("click", function(){
 
-        // Agar already Admin Mode ON hai
-        if(adminMode){
+    if(adminMode){
+        adminMode = false;
 
-            adminMode = false;
+        document.body.classList.remove("admin");
+        adminBtn.textContent = "✏️ EDIT";
+        notesBox.readOnly = true;
 
-            document.body.classList.remove("admin");
+        renderMembers();
+        renderGVG();
+        renderGallery();
 
-            adminBtn.textContent = "✏️ EDIT";
-
-            notesBox.readOnly = true;
-
-            renderMembers();
-            renderGVG();
-            renderGallery();
-
-            return;
-        }
-
-        // Password + OK / Cancel
-        const password = prompt(
-            "🔐 Enter Admin Password:"
-        );
-
-        // CANCEL dabaya
-        if(password === null){
-            return;
-        }
-
-        // Password check
-        if(password === "8200156048"){
-
-            adminMode = true;
-
-            document.body.classList.add("admin");
-
-            adminBtn.textContent = "🔒 LOCK";
-
-            notesBox.readOnly = false;
-
-            loadEditorValues();
-
-            renderMembers();
-            renderGVG();
-            renderGallery();
-
-            alert("✅ Admin Mode ON");
-
-        }else{
-
-            alert("❌ Wrong Password");
-
-        }
-
+        auth.signOut();
+        return;
     }
-);
 
+    const email = prompt("📧 Enter Admin Email:");
+    if(email === null) return;
+
+    const password = prompt("🔐 Enter Firebase Password:");
+    if(password === null) return;
+
+    auth.signInWithEmailAndPassword(
+        email.trim(),
+        password
+    )
+    .then(function(userCredential){
+
+        if(userCredential.user.uid !== ADMIN_UID){
+            alert("❌ This account is not the admin.");
+            auth.signOut();
+            return;
+        }
+
+        adminMode = true;
+
+        document.body.classList.add("admin");
+        adminBtn.textContent = "🔒 LOCK";
+        notesBox.readOnly = false;
+
+        loadEditorValues();
+        renderMembers();
+        renderGVG();
+        renderGallery();
+
+        alert("✅ Admin Mode ON");
+
+    })
+    .catch(function(error){
+
+        console.error("Firebase Login Error:", error);
+        alert("❌ Login failed.\nEmail ya password check karo.");
+
+    });
+
+});
             
 
 
@@ -1919,13 +1895,34 @@ function escapeAttribute(value){
    INITIALIZE
 ===================================================== */
 
-renderHome();
+dbRef.on("value", function(snapshot){
 
-renderMembers();
+    const remoteData = snapshot.val();
 
-renderGVG();
+    data = normalizeData(remoteData);
 
-renderGallery();
+    firebaseReady = true;
+
+    renderHome();
+    renderMembers();
+    renderGVG();
+    renderGallery();
+
+    notesBox.value = data.notes || "";
+
+    if(adminMode){
+        loadEditorValues();
+    }
+
+    console.log("✅ Firebase data loaded/synced");
+
+}, function(error){
+
+    console.error("Firebase read error:", error);
+
+    alert("❌ Firebase data load nahi hua.");
+
+});
 
 </script>
 
