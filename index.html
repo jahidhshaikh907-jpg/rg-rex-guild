@@ -381,6 +381,23 @@ body.admin .editor{
         font-size:12px;
     }
 }
+/* TOUCH FIX */
+#imageModal{
+    display:none !important;
+    pointer-events:none !important;
+}
+
+body{
+    pointer-events:auto !important;
+}
+
+button,
+a,
+input,
+textarea,
+select{
+    pointer-events:auto !important;
+}
 </style>
 <!-- FIREBASE START -->
 <script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-app-compat.js"></script>
