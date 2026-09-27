@@ -428,7 +428,111 @@ const ADMIN_UID = "AlYyBPeeoeYUsu4DlwdOFNY14gg2";
 </head>
 
 <body>
+<!-- RG NEXUS INTRO START -->
 
+<style>
+#introScreen{
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    background:#1b120c;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:#f5dfb0;
+    transition:opacity .6s ease;
+}
+
+.introContent{
+    animation:introZoom 1.2s ease;
+}
+
+.introTitle{
+    font-size:42px;
+    font-weight:bold;
+    letter-spacing:6px;
+    margin-bottom:10px;
+}
+
+.introSubtitle{
+    font-size:18px;
+    letter-spacing:2px;
+    margin-bottom:25px;
+}
+
+.introWelcome{
+    font-size:16px;
+    opacity:.9;
+}
+
+.introLoader{
+    width:45px;
+    height:45px;
+    border:4px solid #6f4a25;
+    border-top:4px solid #d19a4a;
+    border-radius:50%;
+    margin:25px auto 0;
+    animation:spinIntro 1s linear infinite;
+}
+
+@keyframes spinIntro{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+@keyframes introZoom{
+    from{
+        opacity:0;
+        transform:scale(.8);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+</style>
+
+<div id="introScreen">
+    <div class="introContent">
+
+        <div class="introTitle">
+            RG NEXUS
+        </div>
+
+        <div class="introSubtitle">
+            ALL MEMBER'S GUILD
+        </div>
+
+        <div class="introWelcome">
+            ✨ WELCOME TO RG NEXUS ✨
+        </div>
+
+        <div class="introLoader"></div>
+
+    </div>
+</div>
+
+<script>
+setTimeout(function(){
+
+    const intro = document.getElementById("introScreen");
+
+    if(intro){
+
+        intro.style.opacity = "0";
+
+        setTimeout(function(){
+            intro.remove();
+        }, 600);
+
+    }
+
+}, 2500);
+</script>
+
+<!-- RG NEXUS INTRO END -->
 <header>
 
     <h1 id="siteName">RG REX</h1>
