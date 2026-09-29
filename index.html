@@ -783,15 +783,41 @@ const ADMIN_UID = "AlYyBPeeoeYUsu4DlwdOFNY14gg2";
             intro.remove();
         },800);
 
-    });
+<body>
 
-    /* Video play karne ki koshish */
-    video.play().catch(function(error){
-        console.log("Video autoplay:", error);
-    });
+<!-- RG NEXUS VIDEO INTRO -->
+<div id="introScreen">
 
-})();
-</script><!-- ================= END VIDEO INTRO ================= -->
+    <video
+        id="introVideo"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+    >
+        <source src="lv_0_20260928212616.mp4" type="video/mp4">
+    </video>
+
+    <div class="introOverlay"></div>
+
+    <div class="introContent">
+        <div class="introTitle">RG NEXUS</div>
+
+        <div class="introLine"></div>
+
+        <div class="introSubtitle">
+            ALL MEMBER'S GUILD
+        </div>
+
+        <div class="introWelcome">
+            ✨ WELCOME TO RG NEXUS ✨
+        </div>
+    </div>
+
+</div>
+
+<header>
     <button id="adminBtn" type="button">
         ✏️ EDIT
     </button>
