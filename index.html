@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RG REX - Guild Notebook</title>
+<title>RG NEXUS - Guild Notebook</title>
 
 <style>
 *{
@@ -19,7 +19,8 @@ body{
     min-height:100vh;
 }
 
-/* HEADER */
+/* ================= HEADER ================= */
+
 header{
     position:sticky;
     top:0;
@@ -54,19 +55,7 @@ header p{
     cursor:pointer;
 }
 
-#adminBtn:hover{
-    background:#c28b45;
-}
-
-/* NAVIGATION */
-nav{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:7px;
-    padding:10px;
-    background:#2b2015;
-}
+/* ================= BUTTONS ================= */
 
 button{
     border:0;
@@ -82,7 +71,19 @@ button:hover{
     background:#c28b45;
 }
 
-/* NOTEBOOK */
+/* ================= NAV ================= */
+
+nav{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+    padding:10px;
+    background:#2b2015;
+}
+
+/* ================= NOTEBOOK ================= */
+
 .book{
     width:95%;
     max-width:1100px;
@@ -126,7 +127,8 @@ button:hover{
     border-radius:0 8px 8px 0;
 }
 
-/* SECTIONS */
+/* ================= SECTIONS ================= */
+
 .section{
     display:none;
 }
@@ -145,7 +147,8 @@ h2{
     background:#6f4a25;
 }
 
-/* EDITOR */
+/* ================= EDITOR ================= */
+
 .editor{
     display:none;
     background:#fff1d0;
@@ -184,7 +187,8 @@ body.admin .editor{
     font-weight:bold;
 }
 
-/* HOME */
+/* ================= HOME ================= */
+
 .cover{
     text-align:center;
     padding:15px;
@@ -217,11 +221,11 @@ body.admin .editor{
     gap:8px;
 }
 
-/* CARDS */
+/* ================= CARDS ================= */
+
 .grid{
     display:grid;
-    grid-template-columns:
-        repeat(auto-fit,minmax(210px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
     gap:15px;
 }
 
@@ -247,7 +251,8 @@ body.admin .editor{
     margin-top:10px;
 }
 
-/* NOTES */
+/* ================= NOTES ================= */
+
 .note{
     width:100%;
     min-height:350px;
@@ -259,7 +264,8 @@ body.admin .editor{
     resize:vertical;
 }
 
-/* GVG */
+/* ================= GVG ================= */
+
 .badge{
     display:inline-block;
     color:white;
@@ -282,11 +288,11 @@ body.admin .editor{
     background:#777;
 }
 
-/* GALLERY */
+/* ================= GALLERY ================= */
+
 .gallery{
     display:grid;
-    grid-template-columns:
-        repeat(auto-fit,minmax(190px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
     gap:14px;
 }
 
@@ -299,12 +305,13 @@ body.admin .editor{
     cursor:pointer;
 }
 
-/* MODAL */
+/* ================= MODAL ================= */
+
 .modal{
     display:none;
     position:fixed;
     inset:0;
-    z-index:100;
+    z-index:1000;
     background:#000c;
     align-items:center;
     justify-content:center;
@@ -327,7 +334,182 @@ body.admin .editor{
     cursor:pointer;
 }
 
-/* MOBILE */
+/* ================= CHAT ================= */
+
+#chat{
+    padding:5px;
+}
+
+#chat h2{
+    text-align:center;
+    margin-bottom:15px;
+}
+
+#chatMessages{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    margin-bottom:15px;
+}
+
+.chatMessage{
+    background:#3b2415;
+    color:white;
+    padding:12px;
+    border-radius:12px;
+    box-shadow:0 3px 10px #0005;
+}
+
+.chatUser{
+    font-weight:bold;
+    font-size:16px;
+    margin-bottom:7px;
+}
+
+.chatText{
+    margin:8px 0;
+    word-wrap:break-word;
+    white-space:pre-wrap;
+}
+
+.chatImage{
+    width:100%;
+    max-width:300px;
+    max-height:300px;
+    object-fit:cover;
+    border-radius:10px;
+    display:block;
+    margin:8px 0;
+}
+
+.chatDelete{
+    background:#d32f2f !important;
+}
+
+.chatBox{
+    background:#2b2015;
+    padding:12px;
+    border-radius:12px;
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+}
+
+.chatBox input,
+.chatBox textarea{
+    width:100%;
+    padding:11px;
+    border:0;
+    border-radius:8px;
+    font-size:15px;
+}
+
+.chatBox textarea{
+    min-height:80px;
+    resize:vertical;
+}
+
+.chatSend{
+    background:#9b6b32 !important;
+}
+
+/* =====================================================
+   RG NEXUS VIDEO INTRO
+===================================================== */
+
+#introScreen{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:999999;
+    background:#000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    opacity:1;
+    visibility:visible;
+    transition:opacity .8s ease, visibility .8s ease;
+}
+
+#introVideo{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:1;
+}
+
+.introOverlay{
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.35);
+    z-index:2;
+}
+
+.introContent{
+    position:relative;
+    z-index:3;
+    text-align:center;
+    color:white;
+    animation:introZoom 1.2s ease;
+}
+
+.introTitle{
+    font-family:Georgia,serif;
+    font-size:clamp(40px,10vw,80px);
+    font-weight:bold;
+    letter-spacing:8px;
+    text-shadow:
+        0 0 10px #d19a4a,
+        0 0 30px #9b6b32,
+        0 4px 15px #000;
+}
+
+.introLine{
+    width:220px;
+    max-width:70vw;
+    height:2px;
+    background:#d19a4a;
+    margin:15px auto;
+    box-shadow:0 0 10px #d19a4a;
+}
+
+.introSubtitle{
+    font-family:Arial,sans-serif;
+    font-size:clamp(13px,4vw,20px);
+    letter-spacing:4px;
+    text-shadow:0 3px 10px #000;
+}
+
+.introWelcome{
+    margin-top:25px;
+    font-family:Arial,sans-serif;
+    font-size:16px;
+    text-shadow:0 3px 10px #000;
+}
+
+#introScreen.hide{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+}
+
+@keyframes introZoom{
+    from{
+        opacity:0;
+        transform:scale(.7);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+/* ================= MOBILE ================= */
+
 @media(max-width:600px){
 
     header{
@@ -380,26 +562,15 @@ body.admin .editor{
         padding:8px 10px;
         font-size:12px;
     }
-}
-/* TOUCH FIX */
-#imageModal{
-    display:none !important;
-    pointer-events:none !important;
-}
 
-body{
-    pointer-events:auto !important;
-}
-
-button,
-a,
-input,
-textarea,
-select{
-    pointer-events:auto !important;
+    .introTitle{
+        letter-spacing:5px;
+    }
 }
 </style>
-<!-- FIREBASE START -->
+
+<!-- ================= FIREBASE ================= -->
+
 <script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-database-compat.js"></script>
@@ -423,386 +594,37 @@ const dbRef = db.ref("rgNexus/data");
 
 const ADMIN_UID = "AlYyBPeeoeYUsu4DlwdOFNY14gg2";
 </script>
-<!-- FIREBASE END -->
 
 </head>
 
 <body>
 
-<header>
+<!-- =====================================================
+     VIDEO INTRO
+===================================================== -->
 
-    <h1 id="siteName">RG REX</h1>
-
-    <p id="siteSubtitle">
-        Guild Notebook
-    <!-- ================= RG NEXUS INTRO START ================= --><style>
-#introScreen{
-    position:fixed;
-    inset:0;
-    width:100%;
-    height:100%;
-    z-index:999999;
-    background:
-        radial-gradient(circle at center,#3b2514 0%,#1b120c 45%,#090604 100%);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    color:#f5dfb0;
-    overflow:hidden;
-    opacity:1;
-    visibility:visible;
-    transition:
-        opacity 0.8s ease,
-        visibility 0.8s ease;
-}
-
-/* Background glow */
-#introScreen::before{
-    content:"";
-    position:absolute;
-    width:260px;
-    height:260px;
-    border-radius:50%;
-    background:#d19a4a;
-    opacity:.12;
-    filter:blur(70px);
-    animation:introGlow 2.5s ease-in-out infinite alternate;
-}
-
-/* Intro content */
-.introContent{
-    position:relative;
-    z-index:2;
-    padding:25px;
-    animation:introZoom 1.2s cubic-bezier(.17,.67,.35,1.2);
-}
-
-/* RG NEXUS */
-.introTitle{
-    font-family:Georgia,serif;
-    font-size:clamp(38px,10vw,75px);
-    font-weight:bold;
-    letter-spacing:clamp(5px,2vw,12px);
-    color:#f5dfb0;
-    text-shadow:
-        0 0 10px #d19a4a,
-        0 0 25px #9b6b32,
-        0 4px 15px #000;
-    animation:introTitleGlow 1.5s ease-in-out infinite alternate;
-}
-
-/* Line */
-.introLine{
-    width:0;
-    height:2px;
-    background:#d19a4a;
-    margin:15px auto;
-    box-shadow:0 0 10px #d19a4a;
-    animation:introLine 1s ease .6s forwards;
-}
-
-/* Subtitle */
-.introSubtitle{
-    font-family:Arial,sans-serif;
-    font-size:clamp(13px,4vw,20px);
-    letter-spacing:clamp(2px,1vw,5px);
-    color:#c8a978;
-    opacity:0;
-    animation:introText .8s ease .8s forwards;
-}
-
-/* Welcome */
-.introWelcome{
-    margin-top:25px;
-    font-family:Arial,sans-serif;
-    font-size:clamp(13px,3.5vw,17px);
-    color:#fff1d0;
-    opacity:0;
-    animation:introText .8s ease 1.1s forwards;
-}
-
-/* Loader */
-.introLoader{
-    width:42px;
-    height:42px;
-    border:3px solid #5b3b20;
-    border-top:3px solid #d19a4a;
-    border-right:3px solid #f5dfb0;
-    border-radius:50%;
-    margin:27px auto 0;
-    opacity:0;
-    animation:
-        introLoaderShow .5s ease 1.3s forwards,
-        spinIntro 1s linear 1.3s infinite;
-}
-
-/* Fade out class */
-#introScreen.hide{
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-}
-
-/* Animations */
-@keyframes introZoom{
-    0%{
-        opacity:0;
-        transform:scale(.65);
-    }
-    70%{
-        opacity:1;
-        transform:scale(1.05);
-    }
-    100%{
-        opacity:1;
-        transform:scale(1);
-    }
-}
-
-@keyframes introLine{
-    from{
-        width:0;
-    }
-    to{
-        width:min(330px,75vw);
-    }
-}
-
-@keyframes introText{
-    from{
-        opacity:0;
-        transform:translateY(12px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-@keyframes introLoaderShow{
-    from{
-        opacity:0;
-    }
-    to{
-        opacity:1;
-    }
-}
-
-@keyframes spinIntro{
-    to{
-        transform:rotate(360deg);
-    }
-}
-
-@keyframes introGlow{
-    from{
-        transform:scale(.8);
-        opacity:.08;
-    }
-    to{
-        transform:scale(1.4);
-        opacity:.18;
-    }
-}
-
-@keyframes introTitleGlow{
-    from{
-        text-shadow:
-            0 0 8px #d19a4a,
-            0 0 18px #9b6b32,
-            0 4px 15px #000;
-    }
-    to{
-        text-shadow:
-            0 0 15px #d19a4a,
-            0 0 35px #9b6b32,
-            0 4px 15px #000;
-    }
-}
-
-/* Mobile */
-@media(max-width:600px){
-
-    .introContent{
-        width:100%;
-        padding:20px;
-    }
-
-    .introTitle{
-        letter-spacing:5px;
-    }
-
-    .introSubtitle{
-        margin-top:5px;
-    }
-
-    .introWelcome{
-        margin-top:22px;
-    }
-}
-</style><div id="introScreen"><div class="introContent">
-
-    <div class="introTitle">
-        RG NEXUS
-    </div>
-
-    <div class="introLine"></div>
-
-    <div class="introSubtitle">
-        ALL MEMBER'S GUILD
-<!-- ================= RG NEXUS VIDEO INTRO ================= --><style>
-#introScreen{
-    position:fixed;
-    inset:0;
-    width:100%;
-    height:100%;
-    z-index:999999;
-    background:#000;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
-    opacity:1;
-    visibility:visible;
-    transition:opacity .8s ease, visibility .8s ease;
-}
-
-#introVideo{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    z-index:1;
-}
-
-#introScreen::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:rgba(0,0,0,.30);
-    z-index:2;
-}
-
-.introContent{
-    position:relative;
-    z-index:3;
-    text-align:center;
-    color:white;
-    animation:introZoom 1.2s ease;
-}
-
-.introTitle{
-    font-family:Georgia,serif;
-    font-size:clamp(40px,10vw,80px);
-    font-weight:bold;
-    letter-spacing:8px;
-    text-shadow:
-        0 0 10px #d19a4a,
-        0 0 30px #9b6b32,
-        0 4px 15px #000;
-}
-
-.introSubtitle{
-    margin-top:12px;
-    font-family:Arial,sans-serif;
-    font-size:clamp(13px,4vw,20px);
-    letter-spacing:4px;
-    text-shadow:0 3px 10px #000;
-}
-
-.introWelcome{
-    margin-top:25px;
-    font-family:Arial,sans-serif;
-    font-size:16px;
-    text-shadow:0 3px 10px #000;
-}
-
-#introScreen.hide{
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-}
-
-@keyframes introZoom{
-    from{
-        opacity:0;
-        transform:scale(.7);
-    }
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
-}
-</style><div id="introScreen"><!-- VIDEO BACKGROUND -->
-<video
-    id="introVideo"
-    autoplay
-    muted
-    playsinline
-    preload="auto"
->
-    <source src="intro.mp4" type="video/mp4">
-</video>
-
-<!-- INTRO TEXT -->
-<div class="introContent">
-
-    <div class="introTitle">
-        RG NEXUS
-    </div>
-
-    <div class="introSubtitle">
-        ALL MEMBER'S GUILD
-    </div>
-
-    <div class="introWelcome">
-        ✨ WELCOME TO RG NEXUS ✨
-    </div>
-
-</div>
-
-</div><script>
-(function(){
-
-    const intro =
-        document.getElementById("introScreen");
-
-    const video =
-        document.getElementById("introVideo");
-
-    if(!intro || !video) return;
-
-    /* Video khatam hote hi intro remove */
-    video.addEventListener("ended", function(){
-
-        intro.classList.add("hide");
-
-        setTimeout(function(){
-            intro.remove();
-        },800);
-
-<body>
-
-<!-- RG NEXUS VIDEO INTRO -->
 <div id="introScreen">
 
     <video
         id="introVideo"
         autoplay
         muted
-        loop
         playsinline
         preload="auto"
     >
-        <source src="lv_0_20260928212616.mp4" type="video/mp4">
+        <source
+            src="lv_0_20260928212616.mp4"
+            type="video/mp4"
+        >
     </video>
 
     <div class="introOverlay"></div>
 
     <div class="introContent">
-        <div class="introTitle">RG NEXUS</div>
+
+        <div class="introTitle">
+            RG NEXUS
+        </div>
 
         <div class="introLine"></div>
 
@@ -813,58 +635,84 @@ const ADMIN_UID = "AlYyBPeeoeYUsu4DlwdOFNY14gg2";
         <div class="introWelcome">
             ✨ WELCOME TO RG NEXUS ✨
         </div>
+
     </div>
 
 </div>
 
+<!-- ================= HEADER ================= -->
+
 <header>
-    <button id="adminBtn" type="button">
+
+    <h1 id="siteName">
+        RG REX
+    </h1>
+
+    <p id="siteSubtitle">
+        Guild Notebook
+    </p>
+
+    <button
+        id="adminBtn"
+        type="button"
+    >
         ✏️ EDIT
     </button>
 
 </header>
 
+<!-- ================= NAV ================= -->
 
 <nav>
 
-    <button type="button" onclick="showPage('home')">
+    <button onclick="showPage('home')">
         HOME
     </button>
 
-    <button type="button" onclick="showPage('members')">
+    <button onclick="showPage('members')">
         MEMBERS
     </button>
 
-    <button type="button" onclick="showPage('notes')">
+    <button onclick="showPage('notes')">
         NOTES
     </button>
 
-    <button type="button" onclick="showPage('gvg')">
+    <button onclick="showPage('gvg')">
         GVG
     </button>
 
-    <button type="button" onclick="showPage('gallery')">
-        GALLERY 
+    <button onclick="showPage('gallery')">
+        GALLERY
+    </button>
+
+    <button onclick="showPage('chat')">
+        💬 CHAT
+    </button>
 
 </nav>
 
+<!-- ================= NOTEBOOK ================= -->
 
 <div class="book">
 
     <div class="spine">
-        <div class="ring"></div>
-        <div class="ring"></div>
-        <div class="ring"></div>
-        <div class="ring"></div>
-        <div class="ring"></div>
-    </div>
 
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="ring"></div>
+        <div class="ring"></div>
+
+    </div>
 
     <div class="page">
 
+        <!-- ================= HOME ================= -->
 
-        <!-- HOME -->
-        <section id="home" class="section active">
+        <section
+            id="home"
+            class="section active"
+        >
 
             <div class="editor">
 
@@ -904,14 +752,12 @@ const ADMIN_UID = "AlYyBPeeoeYUsu4DlwdOFNY14gg2";
                 >
 
                 <button
-                    type="button"
                     onclick="saveHome()"
                 >
                     SAVE HOME
                 </button>
 
             </div>
-
 
             <div class="cover">
 
@@ -947,24 +793,29 @@ const ADMIN_UID = "AlYyBPeeoeYUsu4DlwdOFNY14gg2";
                         GALLERY
                     </button>
 
+                    <button onclick="showPage('chat')">
+                        💬 CHAT
+                    </button>
+
                 </div>
 
             </div>
 
         </section>
 
+        <!-- ================= MEMBERS ================= -->
 
-        <!-- MEMBERS -->
-        <section id="members" class="section">
+        <section
+            id="members"
+            class="section"
+        >
 
             <button
                 class="back"
-                type="button"
                 onclick="showPage('home')"
             >
                 ← BACK
             </button>
-
 
             <div class="editor">
 
@@ -992,17 +843,15 @@ const ADMIN_UID = "AlYyBPeeoeYUsu4DlwdOFNY14gg2";
                     accept="image/*"
                 >
 
-                <button
-                    type="button"
-                    onclick="addMember()"
-                >
+                <button onclick="addMember()">
                     ADD MEMBER
                 </button>
 
             </div>
 
-
-            <h2>Guild Members</h2>
+            <h2>
+                Guild Members
+            </h2>
 
             <div
                 id="memberList"
@@ -1011,19 +860,23 @@ const ADMIN_UID = "AlYyBPeeoeYUsu4DlwdOFNY14gg2";
 
         </section>
 
+        <!-- ================= NOTES ================= -->
 
-        <!-- NOTES -->
-        <section id="notes" class="section">
+        <section
+            id="notes"
+            class="section"
+        >
 
             <button
                 class="back"
-                type="button"
                 onclick="showPage('home')"
             >
                 ← BACK
             </button>
 
-            <h2>Guild Notes</h2>
+            <h2>
+                Guild Notes
+            </h2>
 
             <textarea
                 id="notesBox"
@@ -1038,18 +891,19 @@ const ADMIN_UID = "AlYyBPeeoeYUsu4DlwdOFNY14gg2";
 
         </section>
 
+        <!-- ================= GVG ================= -->
 
-        <!-- GVG -->
-        <section id="gvg" class="section">
+        <section
+            id="gvg"
+            class="section"
+        >
 
             <button
                 class="back"
-                type="button"
                 onclick="showPage('home')"
             >
                 ← BACK
             </button>
-
 
             <div class="editor">
 
@@ -1093,34 +947,33 @@ const ADMIN_UID = "AlYyBPeeoeYUsu4DlwdOFNY14gg2";
 
                 </select>
 
-                <button
-                    type="button"
-                    onclick="addGVG()"
-                >
+                <button onclick="addGVG()">
                     ADD GVG
                 </button>
 
             </div>
 
-
-            <h2>GVG Battles</h2>
+            <h2>
+                GVG Battles
+            </h2>
 
             <div id="gvgList"></div>
 
         </section>
 
+        <!-- ================= GALLERY ================= -->
 
-        <!-- GALLERY -->
-        <section id="gallery" class="section">
+        <section
+            id="gallery"
+            class="section"
+        >
 
             <button
                 class="back"
-                type="button"
                 onclick="showPage('home')"
             >
                 ← BACK
             </button>
-
 
             <div class="editor">
 
@@ -1132,17 +985,15 @@ const ADMIN_UID = "AlYyBPeeoeYUsu4DlwdOFNY14gg2";
                     accept="image/*"
                 >
 
-                <button
-                    type="button"
-                    onclick="addGalleryPhoto()"
-                >
+                <button onclick="addGalleryPhoto()">
                     ADD PHOTO
                 </button>
 
             </div>
 
-
-            <h2>Guild Gallery</h2>
+            <h2>
+                Guild Gallery
+            </h2>
 
             <div
                 id="galleryList"
@@ -1151,12 +1002,67 @@ const ADMIN_UID = "AlYyBPeeoeYUsu4DlwdOFNY14gg2";
 
         </section>
 
-    </div>
+        <!-- ================= CHAT ================= -->
 
+        <section
+            id="chat"
+            class="section"
+        >
+
+            <button
+                class="back"
+                onclick="showPage('home')"
+            >
+                ← BACK
+            </button>
+
+            <h2>
+                💬 GUILD CHAT
+            </h2>
+
+            <div id="chatMessages">
+                <p style="text-align:center;">
+                    Loading messages...
+                </p>
+            </div>
+
+            <div class="chatBox">
+
+                <input
+                    id="chatName"
+                    type="text"
+                    placeholder="👤 Your Name"
+                    maxlength="30"
+                >
+
+                <input
+                    id="chatPhoto"
+                    type="file"
+                    accept="image/*"
+                >
+
+                <textarea
+                    id="chatText"
+                    placeholder="💬 Write a message..."
+                    maxlength="500"
+                ></textarea>
+
+                <button
+                    class="chatSend"
+                    onclick="sendChatMessage()"
+                >
+                    📤 SEND
+                </button>
+
+            </div>
+
+        </section>
+
+    </div>
 </div>
 
+<!-- ================= IMAGE MODAL ================= -->
 
-<!-- IMAGE MODAL -->
 <div
     id="imageModal"
     class="modal"
@@ -1169,111 +1075,64 @@ const ADMIN_UID = "AlYyBPeeoeYUsu4DlwdOFNY14gg2";
         ×
     </span>
 
-    <img id="modalImage" alt="Gallery Image">
+    <img
+        id="modalImage"
+        alt="Gallery Image"
+    >
 
 </div>
 
+<!-- =====================================================
+     MAIN JAVASCRIPT
+===================================================== -->
 
 <script>
 
 /* =====================================================
-   DATA
+   DEFAULT DATA
 ===================================================== */
-alert("JS START HO GAYA");
+
 const defaultData = {
 
-    name: "RG REX",
+    name:"RG NEXUS",
 
-    subtitle: "Guild Notebook",
+    subtitle:"Guild Notebook",
 
-    title: "GUILD BOOK",
+    title:"GUILD BOOK",
 
     description:
-        "Welcome to the official RG REX Guild Notebook.",
+        "Welcome to the official RG NEXUS Guild Notebook.",
 
     cover:
         "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
 
-    notes: "",
+    notes:"",
 
-    members: [
+    members:[
         {
-            name: "Monster",
-            role: "Guild Leader",
-            image: ""
+            name:"Monster",
+            role:"Guild Leader",
+            image:""
         },
         {
-            name: "Bhai Jaan",
-            role: "Officer",
-            image: ""
+            name:"Bhai Jaan",
+            role:"Officer",
+            image:""
         },
         {
-            name: "Swag",
-            role: "Member",
-            image: ""
+            name:"Swag",
+            role:"Member",
+            image:""
         }
     ],
 
-    gvg: [],
+    gvg:[],
 
-    gallery: []
-
+    gallery:[]
 };
 
-
-/* =====================================================
-   LOAD DATA
-===================================================== */
-
-let data = JSON.parse(JSON.stringify(defaultData));
-let firebaseReady = false;
-
-function normalizeData(value){
-
-    if(!value){
-        return JSON.parse(JSON.stringify(defaultData));
-    }
-
-    value.members = Array.isArray(value.members)
-        ? value.members
-        : [];
-
-    value.gvg = Array.isArray(value.gvg)
-        ? value.gvg
-        : [];
-
-    value.gallery = Array.isArray(value.gallery)
-        ? value.gallery
-        : [];
-
-    return value;
-}
-
-dbRef.on("value", function(snapshot){
-
-    const remoteData = snapshot.val();
-
-    data = normalizeData(remoteData);
-
-    firebaseReady = true;
-
-    renderHome();
-    renderMembers();
-    renderGVG();
-    renderGallery();
-
-    notesBox.value = data.notes || "";
-
-}, function(error){
-
-    console.error("Firebase read error:", error);
-
-});
-
-
-/* =====================================================
-   ADMIN MODE
-===================================================== */
+let data =
+    JSON.parse(JSON.stringify(defaultData));
 
 let adminMode = false;
 
@@ -1365,90 +1224,222 @@ const closeModal =
 
 
 /* =====================================================
+   NORMALIZE DATA
+===================================================== */
+
+function normalizeData(value){
+
+    if(!value){
+        return JSON.parse(
+            JSON.stringify(defaultData)
+        );
+    }
+
+    value.members =
+        Array.isArray(value.members)
+        ? value.members
+        : [];
+
+    value.gvg =
+        Array.isArray(value.gvg)
+        ? value.gvg
+        : [];
+
+    value.gallery =
+        Array.isArray(value.gallery)
+        ? value.gallery
+        : [];
+
+    return value;
+}
+
+
+/* =====================================================
    SAVE DATA
 ===================================================== */
 
 function saveData(){
 
-    if(!auth.currentUser || auth.currentUser.uid !== ADMIN_UID){
+    if(
+        !auth.currentUser ||
+        auth.currentUser.uid !== ADMIN_UID
+    ){
         alert("🔐 Admin login required.");
         return;
     }
 
     dbRef.set(data)
-        .then(function(){
-            console.log("✅ Data saved to Firebase");
-        })
-        .catch(function(error){
-            console.error("Firebase save error:", error);
-            alert("❌ Data save nahi hua.");
-        });
-}
+    .then(function(){
 
-/* =====================================================
-   ADMIN BUTTON
-===================================================== */
-   adminBtn.addEventListener("click", function(){
-
-    if(adminMode){
-        adminMode = false;
-
-        document.body.classList.remove("admin");
-        adminBtn.textContent = "✏️ EDIT";
-        notesBox.readOnly = true;
-
-        renderMembers();
-        renderGVG();
-        renderGallery();
-
-        auth.signOut();
-        return;
-    }
-
-    const email = prompt("📧 Enter Admin Email:");
-    if(email === null) return;
-
-    const password = prompt("🔐 Enter Firebase Password:");
-    if(password === null) return;
-
-    auth.signInWithEmailAndPassword(
-        email.trim(),
-        password
-    )
-    .then(function(userCredential){
-
-        if(userCredential.user.uid !== ADMIN_UID){
-            alert("❌ This account is not the admin.");
-            auth.signOut();
-            return;
-        }
-
-        adminMode = true;
-
-        document.body.classList.add("admin");
-        adminBtn.textContent = "🔒 LOCK";
-        notesBox.readOnly = false;
-
-        loadEditorValues();
-        renderMembers();
-        renderGVG();
-        renderGallery();
-
-        alert("✅ Admin Mode ON");
+        console.log(
+            "✅ Firebase data saved"
+        );
 
     })
     .catch(function(error){
 
-    console.error("Firebase Login Error:", error);
+        console.error(
+            "Firebase save error:",
+            error
+        );
 
-    alert(
-        "❌ Login failed\n\n" +
-        "Error Code: " + error.code + "\n" +
-        "Message: " + error.message
-    );
+        alert(
+            "❌ Data save nahi hua."
+        );
 
-});
-});            
+    });
+}
+
+
+/* =====================================================
+   FIREBASE DATA LISTENER
+===================================================== */
+
+dbRef.on(
+    "value",
+    function(snapshot){
+
+        const remoteData =
+            snapshot.val();
+
+        data =
+            normalizeData(remoteData);
+
+        renderHome();
+        renderMembers();
+        renderGVG();
+        renderGallery();
+
+        notesBox.value =
+            data.notes || "";
+
+        if(adminMode){
+            loadEditorValues();
+        }
+
+        console.log(
+            "✅ Firebase data loaded"
+        );
+
+    },
+    function(error){
+
+        console.error(
+            "Firebase read error:",
+            error
+        );
+
+    }
+);
+
+
+/* =====================================================
+   ADMIN LOGIN
+===================================================== */
+
+adminBtn.addEventListener(
+    "click",
+    function(){
+
+        if(adminMode){
+
+            adminMode = false;
+
+            document.body.classList.remove(
+                "admin"
+            );
+
+            adminBtn.textContent =
+                "✏️ EDIT";
+
+            notesBox.readOnly = true;
+
+            renderMembers();
+            renderGVG();
+            renderGallery();
+
+            auth.signOut();
+
+            return;
+        }
+
+        const email =
+            prompt(
+                "📧 Enter Admin Email:"
+            );
+
+        if(email === null){
+            return;
+        }
+
+        const password =
+            prompt(
+                "🔐 Enter Firebase Password:"
+            );
+
+        if(password === null){
+            return;
+        }
+
+        auth.signInWithEmailAndPassword(
+            email.trim(),
+            password
+        )
+        .then(function(result){
+
+            if(
+                result.user.uid !==
+                ADMIN_UID
+            ){
+
+                alert(
+                    "❌ This account is not the admin."
+                );
+
+                auth.signOut();
+
+                return;
+            }
+
+            adminMode = true;
+
+            document.body.classList.add(
+                "admin"
+            );
+
+            adminBtn.textContent =
+                "🔒 LOCK";
+
+            notesBox.readOnly = false;
+
+            loadEditorValues();
+
+            renderMembers();
+            renderGVG();
+            renderGallery();
+
+            alert(
+                "✅ Admin Mode ON"
+            );
+
+        })
+        .catch(function(error){
+
+            console.error(
+                "Firebase login error:",
+                error
+            );
+
+            alert(
+                "❌ Login failed\n\n" +
+                "Error: " +
+                error.message
+            );
+
+        });
+
+    }
+);
 
 
 /* =====================================================
@@ -1459,30 +1450,29 @@ function showPage(page){
 
     document
         .querySelectorAll(".section")
-        .forEach(
-            function(section){
+        .forEach(function(section){
 
-                section.classList.remove("active");
+            section.classList.remove(
+                "active"
+            );
 
-            }
-        );
-
+        });
 
     const target =
         document.getElementById(page);
 
     if(target){
 
-        target.classList.add("active");
+        target.classList.add(
+            "active"
+        );
 
     }
-
 
     window.scrollTo({
         top:0,
         behavior:"smooth"
     });
-
 }
 
 
@@ -1493,19 +1483,19 @@ function showPage(page){
 function renderHome(){
 
     siteName.textContent =
-        data.name;
+        data.name || "RG NEXUS";
 
     siteSubtitle.textContent =
-        data.subtitle;
+        data.subtitle || "Guild Notebook";
 
     coverTitle.textContent =
-        data.title;
+        data.title || "GUILD BOOK";
 
     coverDescription.textContent =
-        data.description;
+        data.description || "";
 
     coverImage.src =
-        data.cover;
+        data.cover || "";
 
 }
 
@@ -1513,16 +1503,16 @@ function renderHome(){
 function loadEditorValues(){
 
     editName.value =
-        data.name;
+        data.name || "";
 
     editSubtitle.value =
-        data.subtitle;
+        data.subtitle || "";
 
     editTitle.value =
-        data.title;
+        data.title || "";
 
     editDescription.value =
-        data.description;
+        data.description || "";
 
 }
 
@@ -1530,14 +1520,12 @@ function loadEditorValues(){
 function saveHome(){
 
     if(!adminMode){
-
         return;
-
     }
 
     data.name =
         editName.value.trim() ||
-        "RG REX";
+        "RG NEXUS";
 
     data.subtitle =
         editSubtitle.value.trim() ||
@@ -1553,12 +1541,11 @@ function saveHome(){
     saveData();
 
     renderHome();
-
 }
 
 
 /* =====================================================
-   COVER IMAGE
+   COVER PHOTO
 ===================================================== */
 
 coverInput.addEventListener(
@@ -1614,7 +1601,6 @@ function renderMembers(){
             card.className =
                 "card";
 
-
             let photo = "";
 
             if(member.image){
@@ -1623,13 +1609,12 @@ function renderMembers(){
                     `
                     <img
                         class="member-img"
-                        src="${member.image}"
+                        src="${escapeAttribute(member.image)}"
                         alt="Member Photo"
                     >
                     `;
 
             }
-
 
             let editArea = "";
 
@@ -1659,16 +1644,12 @@ function renderMembers(){
 
                     <button
                         class="delete"
-                        type="button"
                         onclick="deleteMember(${index})"
                     >
                         DELETE
                     </button>
-
                 `;
-
             }
-
 
             card.innerHTML = `
 
@@ -1683,15 +1664,12 @@ function renderMembers(){
                 </p>
 
                 ${editArea}
-
             `;
-
 
             memberList.appendChild(card);
 
         }
     );
-
 }
 
 
@@ -1711,7 +1689,6 @@ function addMember(){
     const file =
         memberInput.files[0];
 
-
     if(!name){
 
         alert(
@@ -1719,9 +1696,28 @@ function addMember(){
         );
 
         return;
-
     }
 
+    function finish(image){
+
+        data.members.push({
+
+            name:name,
+
+            role:role,
+
+            image:image || ""
+
+        });
+
+        saveData();
+
+        renderMembers();
+
+        memberName.value = "";
+        memberRole.value = "";
+        memberInput.value = "";
+    }
 
     if(file){
 
@@ -1731,19 +1727,9 @@ function addMember(){
         reader.onload =
             function(event){
 
-                data.members.push({
-
-                    name:name,
-
-                    role:role,
-
-                    image:event.target.result
-
-                });
-
-                saveData();
-
-                renderMembers();
+                finish(
+                    event.target.result
+                );
 
             };
 
@@ -1751,33 +1737,16 @@ function addMember(){
 
     }else{
 
-        data.members.push({
-
-            name:name,
-
-            role:role,
-
-            image:""
-
-        });
-
-        saveData();
-
-        renderMembers();
+        finish("");
 
     }
-
-
-    memberName.value = "";
-
-    memberRole.value = "";
-
-    memberInput.value = "";
-
 }
 
 
-function editMemberName(index,value){
+function editMemberName(
+    index,
+    value
+){
 
     if(!adminMode){
         return;
@@ -1787,13 +1756,13 @@ function editMemberName(index,value){
         value.trim();
 
     saveData();
-
-    renderMembers();
-
 }
 
 
-function editMemberRole(index,value){
+function editMemberRole(
+    index,
+    value
+){
 
     if(!adminMode){
         return;
@@ -1803,13 +1772,13 @@ function editMemberRole(index,value){
         value.trim();
 
     saveData();
-
-    renderMembers();
-
 }
 
 
-function changeMemberImage(index,input){
+function changeMemberImage(
+    index,
+    input
+){
 
     if(!adminMode){
         return;
@@ -1838,7 +1807,6 @@ function changeMemberImage(index,input){
         };
 
     reader.readAsDataURL(file);
-
 }
 
 
@@ -1864,17 +1832,12 @@ function deleteMember(index){
         renderMembers();
 
     }
-
 }
 
 
 /* =====================================================
    NOTES
 ===================================================== */
-
-notesBox.value =
-    data.notes || "";
-
 
 notesBox.addEventListener(
     "input",
@@ -1901,16 +1864,13 @@ function renderGVG(){
 
     gvgList.innerHTML = "";
 
-
     if(data.gvg.length === 0){
 
         gvgList.innerHTML =
             "<p>No GVG records yet.</p>";
 
         return;
-
     }
-
 
     data.gvg.forEach(
         function(match,index){
@@ -1920,7 +1880,6 @@ function renderGVG(){
 
             box.className =
                 "gvg";
-
 
             let editArea = "";
 
@@ -1977,25 +1936,21 @@ function renderGVG(){
 
                     <button
                         class="delete"
-                        type="button"
                         onclick="deleteGVG(${index})"
                     >
                         DELETE
                     </button>
-
                 `;
-
             }
-
 
             box.innerHTML = `
 
-                <span class="badge ${escapeHTML(match.result)}">
+                <span class="badge ${escapeAttribute(match.result)}">
                     ${escapeHTML(match.result)}
                 </span>
 
                 <h3>
-                    RG REX vs
+                    RG NEXUS vs
                     ${escapeHTML(match.enemy)}
                 </h3>
 
@@ -2015,15 +1970,12 @@ function renderGVG(){
                 </p>
 
                 ${editArea}
-
             `;
-
 
             gvgList.appendChild(box);
 
         }
     );
-
 }
 
 
@@ -2043,9 +1995,7 @@ function addGVG(){
         );
 
         return;
-
     }
-
 
     data.gvg.unshift({
 
@@ -2061,24 +2011,22 @@ function addGVG(){
 
     });
 
-
     saveData();
 
     renderGVG();
 
-
     enemyGuild.value = "";
-
     gvgDate.value = "";
-
     gvgTime.value = "";
-
     gvgScore.value = "";
-
 }
 
 
-function editGVG(index,key,value){
+function editGVG(
+    index,
+    key,
+    value
+){
 
     if(!adminMode){
         return;
@@ -2088,9 +2036,6 @@ function editGVG(index,key,value){
         value;
 
     saveData();
-
-    renderGVG();
-
 }
 
 
@@ -2116,7 +2061,6 @@ function deleteGVG(index){
         renderGVG();
 
     }
-
 }
 
 
@@ -2128,16 +2072,13 @@ function renderGallery(){
 
     galleryList.innerHTML = "";
 
-
     if(data.gallery.length === 0){
 
         galleryList.innerHTML =
             "<p>No photos yet.</p>";
 
         return;
-
     }
-
 
     data.gallery.forEach(
         function(photo,index){
@@ -2148,11 +2089,10 @@ function renderGallery(){
             box.className =
                 "photoBox";
 
-
             box.innerHTML = `
 
                 <img
-                    src="${photo}"
+                    src="${escapeAttribute(photo)}"
                     alt="Guild Photo"
                     onclick="openModal(this.src)"
                 >
@@ -2163,7 +2103,6 @@ function renderGallery(){
                     `
                     <button
                         class="delete"
-                        type="button"
                         onclick="deleteGalleryPhoto(${index})"
                     >
                         DELETE
@@ -2172,15 +2111,12 @@ function renderGallery(){
                     :
                     ""
                 }
-
             `;
-
 
             galleryList.appendChild(box);
 
         }
     );
-
 }
 
 
@@ -2200,9 +2136,16 @@ function addGalleryPhoto(){
         );
 
         return;
-
     }
 
+    if(file.size > 2 * 1024 * 1024){
+
+        alert(
+            "⚠️ Photo 2 MB se chhoti rakho."
+        );
+
+        return;
+    }
 
     const reader =
         new FileReader();
@@ -2222,9 +2165,7 @@ function addGalleryPhoto(){
 
         };
 
-
     reader.readAsDataURL(file);
-
 }
 
 
@@ -2250,7 +2191,6 @@ function deleteGalleryPhoto(index){
         renderGallery();
 
     }
-
 }
 
 
@@ -2265,7 +2205,6 @@ function openModal(src){
 
     imageModal.style.display =
         "flex";
-
 }
 
 
@@ -2273,7 +2212,6 @@ function closeImageModal(){
 
     imageModal.style.display =
         "none";
-
 }
 
 
@@ -2288,7 +2226,8 @@ imageModal.addEventListener(
     function(event){
 
         if(
-            event.target === imageModal
+            event.target ===
+            imageModal
         ){
 
             closeImageModal();
@@ -2303,9 +2242,7 @@ document.addEventListener(
     "keydown",
     function(event){
 
-        if(
-            event.key === "Escape"
-        ){
+        if(event.key === "Escape"){
 
             closeImageModal();
 
@@ -2316,356 +2253,160 @@ document.addEventListener(
 
 
 /* =====================================================
-   SECURITY / HTML ESCAPE
+   CHAT
 ===================================================== */
 
-function escapeHTML(value){
-
-    return String(value ?? "")
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-
-}
+const chatRef =
+    db.ref("chatMessages");
 
 
-function escapeAttribute(value){
+chatRef.on(
+    "value",
+    function(snapshot){
 
-    return escapeHTML(value);
+        const box =
+            document.getElementById(
+                "chatMessages"
+            );
 
-}
-
-
-/* =====================================================
-   INITIALIZE
-===================================================== */
-
-dbRef.on("value", function(snapshot){
-
-    const remoteData = snapshot.val();
-
-    data = normalizeData(remoteData);
-
-    firebaseReady = true;
-
-    renderHome();
-    renderMembers();
-    renderGVG();
-    renderGallery();
-
-    notesBox.value = data.notes || "";
-
-    if(adminMode){
-        loadEditorValues();
-    }
-
-    console.log("✅ Firebase data loaded/synced");
-
-}, function(error){
-
-    console.error("Firebase read error:", error);
-
-    alert("❌ Firebase data load nahi hua.");
-
-});
-
-</script>
-<!-- ================= CHAT SYSTEM START ================= -->
-
-<style>
-#chat{
-    padding:15px;
-}
-
-#chat h2{
-    text-align:center;
-    margin-bottom:15px;
-}
-
-#chatMessages{
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-    margin-bottom:15px;
-}
-
-.chatMessage{
-    background:#3b2415;
-    color:white;
-    padding:12px;
-    border-radius:12px;
-    box-shadow:0 3px 10px #0005;
-}
-
-.chatUser{
-    font-weight:bold;
-    font-size:16px;
-    margin-bottom:7px;
-}
-
-.chatText{
-    margin:8px 0;
-    word-wrap:break-word;
-}
-
-.chatImage{
-    width:100%;
-    max-width:300px;
-    max-height:300px;
-    object-fit:cover;
-    border-radius:10px;
-    display:block;
-    margin:8px 0;
-}
-
-.chatDelete{
-    background:#d32f2f !important;
-    color:white !important;
-    padding:7px 12px !important;
-    border-radius:7px !important;
-    border:0 !important;
-}
-
-.chatBox{
-    background:#2b2015;
-    padding:12px;
-    border-radius:12px;
-    display:flex;
-    flex-direction:column;
-    gap:9px;
-}
-
-.chatBox input,
-.chatBox textarea{
-    width:100%;
-    box-sizing:border-box;
-    padding:11px;
-    border:0;
-    border-radius:8px;
-    font-size:15px;
-}
-
-.chatBox textarea{
-    min-height:80px;
-    resize:vertical;
-}
-
-.chatSend{
-    background:#9b6b32 !important;
-    color:white !important;
-}
-</style>
-
-<script>
-/* ================= CHAT PAGE ================= */
-
-(function(){
-
-    /* CHAT BUTTON */
-    const nav = document.querySelector("nav");
-
-    if(nav && !document.getElementById("chatNavBtn")){
-
-        const chatButton = document.createElement("button");
-
-        chatButton.id = "chatNavBtn";
-        chatButton.type = "button";
-        chatButton.textContent = "💬 CHAT";
-
-        chatButton.onclick = function(){
-            showPage("chat");
-        };
-
-        nav.appendChild(chatButton);
-    }
-
-
-    /* CHAT PAGE */
-    if(!document.getElementById("chat")){
-
-        const chatSection = document.createElement("section");
-
-        chatSection.id = "chat";
-        chatSection.className = "section";
-
-        chatSection.innerHTML = `
-            <h2>💬 GUILD CHAT</h2>
-
-            <div id="chatMessages">
-                <p style="text-align:center;">
-                    Loading messages...
-                </p>
-            </div>
-
-            <div class="chatBox">
-
-                <input
-                    id="chatName"
-                    type="text"
-                    placeholder="👤 Your Name"
-                    maxlength="30"
-                >
-
-                <input
-                    id="chatPhoto"
-                    type="file"
-                    accept="image/*"
-                >
-
-                <textarea
-                    id="chatText"
-                    placeholder="💬 Write a message..."
-                    maxlength="500"
-                ></textarea>
-
-                <button
-                    type="button"
-                    class="chatSend"
-                    onclick="sendChatMessage()">
-                    📤 SEND
-                </button>
-
-            </div>
-        `;
-
-        const page = document.querySelector(".page");
-
-        if(page){
-            page.appendChild(chatSection);
+        if(!box){
+            return;
         }
-    }
 
+        box.innerHTML = "";
 
-    /* FIREBASE CHAT */
-    if(typeof db !== "undefined"){
+        if(!snapshot.exists()){
 
-        window.chatRef = db.ref("chatMessages");
+            box.innerHTML =
+                `
+                <p style="text-align:center;">
+                    💬 No messages yet.
+                </p>
+                `;
 
-        chatRef.on("value", function(snapshot){
+            return;
+        }
 
-            const box =
-                document.getElementById("chatMessages");
+        snapshot.forEach(
+            function(child){
 
-            if(!box) return;
-
-            box.innerHTML = "";
-
-            if(!snapshot.exists()){
-
-                box.innerHTML =
-                    '<p style="text-align:center;">💬 No messages yet.</p>';
-
-                return;
-            }
-
-            snapshot.forEach(function(child){
-
-                const msg = child.val();
+                const msg =
+                    child.val();
 
                 const div =
                     document.createElement("div");
 
-                div.className = "chatMessage";
+                div.className =
+                    "chatMessage";
 
                 const user =
                     document.createElement("div");
 
-                user.className = "chatUser";
+                user.className =
+                    "chatUser";
 
                 user.textContent =
-                    "👤 " + (msg.name || "Unknown");
+                    "👤 " +
+                    (msg.name || "Unknown");
 
                 div.appendChild(user);
-
 
                 if(msg.photo){
 
                     const img =
                         document.createElement("img");
 
-                    img.className = "chatImage";
-                    img.src = msg.photo;
+                    img.className =
+                        "chatImage";
+
+                    img.src =
+                        msg.photo;
 
                     div.appendChild(img);
                 }
-
 
                 if(msg.text){
 
                     const text =
                         document.createElement("div");
 
-                    text.className = "chatText";
+                    text.className =
+                        "chatText";
 
-                    text.textContent = msg.text;
+                    text.textContent =
+                        msg.text;
 
                     div.appendChild(text);
                 }
 
+                /*
+                   DELETE BUTTON
+                   Sirf Admin ko dikhega
+                */
 
-                const deleteButton =
-                    document.createElement("button");
+                if(adminMode){
 
-                deleteButton.className =
-                    "chatDelete";
+                    const deleteButton =
+                        document.createElement("button");
 
-                deleteButton.type = "button";
+                    deleteButton.className =
+                        "chatDelete";
 
-                deleteButton.textContent =
-                    "🗑️ DELETE";
+                    deleteButton.textContent =
+                        "🗑️ DELETE";
 
-                deleteButton.onclick =
-                    function(){
+                    deleteButton.onclick =
+                        function(){
 
-                        if(
-                            confirm(
-                                "Delete this message?"
-                            )
-                        ){
+                            if(
+                                confirm(
+                                    "Delete this message?"
+                                )
+                            ){
 
-                            chatRef
-                                .child(child.key)
-                                .remove();
+                                chatRef
+                                    .child(child.key)
+                                    .remove();
 
-                        }
-                    };
+                            }
 
-                div.appendChild(deleteButton);
+                        };
+
+                    div.appendChild(
+                        deleteButton
+                    );
+                }
 
                 box.appendChild(div);
 
-            });
-
-        });
+            }
+        );
 
     }
+);
 
-})();
 
+/* =====================================================
+   SEND CHAT MESSAGE
+===================================================== */
 
-/* SEND MESSAGE */
-
-window.sendChatMessage = function(){
-
-    if(typeof chatRef === "undefined"){
-
-        alert("❌ Chat Firebase connection nahi hai.");
-
-        return;
-    }
-
+window.sendChatMessage =
+function(){
 
     const nameInput =
-        document.getElementById("chatName");
+        document.getElementById(
+            "chatName"
+        );
 
     const textInput =
-        document.getElementById("chatText");
+        document.getElementById(
+            "chatText"
+        );
 
     const photoInput =
-        document.getElementById("chatPhoto");
-
+        document.getElementById(
+            "chatPhoto"
+        );
 
     const name =
         nameInput.value.trim();
@@ -2676,22 +2417,23 @@ window.sendChatMessage = function(){
     const file =
         photoInput.files[0];
 
-
     if(!name){
 
-        alert("👤 Apna name enter karo.");
+        alert(
+            "👤 Apna name enter karo."
+        );
 
         return;
     }
-
 
     if(!text && !file){
 
-        alert("💬 Message ya photo add karo.");
+        alert(
+            "💬 Message ya photo add karo."
+        );
 
         return;
     }
-
 
     function saveMessage(photo){
 
@@ -2709,12 +2451,15 @@ window.sendChatMessage = function(){
 
         textInput.value = "";
         photoInput.value = "";
-    }
 
+    }
 
     if(file){
 
-        if(file.size > 2 * 1024 * 1024){
+        if(
+            file.size >
+            2 * 1024 * 1024
+        ){
 
             alert(
                 "⚠️ Photo 2 MB se chhoti rakho."
@@ -2722,7 +2467,6 @@ window.sendChatMessage = function(){
 
             return;
         }
-
 
         const reader =
             new FileReader();
@@ -2746,8 +2490,144 @@ window.sendChatMessage = function(){
 
 };
 
+
+/* =====================================================
+   HTML SECURITY
+===================================================== */
+
+function escapeHTML(value){
+
+    return String(
+        value ?? ""
+    )
+    .replaceAll(
+        "&",
+        "&amp;"
+    )
+    .replaceAll(
+        "<",
+        "&lt;"
+    )
+    .replaceAll(
+        ">",
+        "&gt;"
+    )
+    .replaceAll(
+        '"',
+        "&quot;"
+    )
+    .replaceAll(
+        "'",
+        "&#039;"
+    );
+}
+
+
+function escapeAttribute(value){
+
+    return escapeHTML(value);
+
+}
+
+
+/* =====================================================
+   VIDEO INTRO
+===================================================== */
+
+(function(){
+
+    const intro =
+        document.getElementById(
+            "introScreen"
+        );
+
+    const video =
+        document.getElementById(
+            "introVideo"
+        );
+
+    if(!intro || !video){
+        return;
+    }
+
+    function hideIntro(){
+
+        if(
+            intro.classList.contains(
+                "hide"
+            )
+        ){
+            return;
+        }
+
+        intro.classList.add(
+            "hide"
+        );
+
+        setTimeout(
+            function(){
+
+                if(intro){
+                    intro.remove();
+                }
+
+            },
+            800
+        );
+    }
+
+    /*
+       Video normally autoplay karegi.
+       Agar browser autoplay ko block kare,
+       muted hone ki wajah se play try hoga.
+    */
+
+    video.play().catch(
+        function(error){
+
+            console.log(
+                "Video autoplay blocked:",
+                error
+            );
+
+        }
+    );
+
+    /*
+       Video end hone par intro hide.
+       Agar video loop nahi hai to yahi chalega.
+    */
+
+    video.addEventListener(
+        "ended",
+        hideIntro
+    );
+
+    /*
+       Safety:
+       Agar video load/play issue kare,
+       website permanently block nahi hogi.
+    */
+
+    setTimeout(
+        function(){
+
+            if(
+                !video ||
+                video.readyState < 2
+            ){
+
+                hideIntro();
+
+            }
+
+        },
+        6000
+    );
+
+})();
+
 </script>
 
-<!-- ================= CHAT SYSTEM END ================= -->
 </body>
 </html>
